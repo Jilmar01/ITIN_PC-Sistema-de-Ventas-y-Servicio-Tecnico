@@ -15,4 +15,19 @@ public class Autorizacion {
         
         return u.getRol().equals("ADMIN");
     }
+    
+    public static boolean esVendedor(int usuario_id) throws Excepciones {
+        UsuarioDAO usuario = new UsuarioDAO();
+        Usuario u = usuario.obtenerUsuarioPorId(usuario_id);
+        
+        return u.getRol().equals("VENDEDOR");
+    }
+    
+    public static boolean esTecnico(int usuario_id) throws Excepciones {
+        UsuarioDAO usuario = new UsuarioDAO();
+        Usuario u = usuario.obtenerUsuarioPorId(usuario_id);
+        
+        return u.getRol().equals("TECNICO");
+    }
+    
 }
