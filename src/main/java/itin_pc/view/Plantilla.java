@@ -32,12 +32,12 @@ public class Plantilla extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelMain = new javax.swing.JPanel();
         panelActions = new javax.swing.JPanel();
         lblIcon = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         btnMinimize = new javax.swing.JLabel();
         btnExit = new javax.swing.JLabel();
-        panelMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -49,30 +49,34 @@ public class Plantilla extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelActions.setBackground(new java.awt.Color(0, 0, 0));
+        panelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(panelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1220, 670));
+
+        panelActions.setBackground(new java.awt.Color(215, 235, 255));
         panelActions.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 panelActionsMouseDragged(evt);
             }
         });
         panelActions.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelActionsMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panelActionsMousePressed(evt);
             }
         });
         panelActions.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon.png"))); // NOI18N
-        panelActions.add(lblIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 0, -1, -1));
+        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/logo_icono.png"))); // NOI18N
+        panelActions.add(lblIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 30));
 
+        lblTitle.setBackground(new java.awt.Color(0, 51, 153));
         lblTitle.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitle.setText("ITIN-PC");
+        lblTitle.setForeground(new java.awt.Color(0, 51, 153));
+        lblTitle.setText("ITIN-PC Mundo Tecnologico");
         panelActions.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 0, -1, 30));
 
-        btnMinimize.setBackground(new java.awt.Color(0, 0, 0));
-        btnMinimize.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btnMinimize.setForeground(new java.awt.Color(255, 255, 255));
+        btnMinimize.setBackground(new java.awt.Color(215, 235, 255));
+        btnMinimize.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnMinimize.setForeground(new java.awt.Color(0, 51, 153));
         btnMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnMinimize.setText("-");
         btnMinimize.setOpaque(true);
@@ -89,9 +93,9 @@ public class Plantilla extends javax.swing.JFrame {
         });
         panelActions.add(btnMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 0, 50, 30));
 
-        btnExit.setBackground(new java.awt.Color(0, 0, 0));
+        btnExit.setBackground(new java.awt.Color(215, 235, 255));
         btnExit.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        btnExit.setForeground(new java.awt.Color(255, 255, 255));
+        btnExit.setForeground(new java.awt.Color(0, 51, 153));
         btnExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnExit.setText("X");
         btnExit.setOpaque(true);
@@ -109,41 +113,44 @@ public class Plantilla extends javax.swing.JFrame {
         panelActions.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 0, 50, 30));
 
         getContentPane().add(panelActions, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, 30));
-        getContentPane().add(panelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1220, 670));
 
         getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
-        btnExit.setBackground(Color.red);
-        btnExit.setForeground(Color.white);
-        //evt.mouseEntered(btnExit, Color.red, Color.white);
-    }//GEN-LAST:event_btnExitMouseEntered
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //container.setPanel(new PanelOptions(),panelContainer);
+        //setDates();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
+        this.setExtendedState(1);
+    }//GEN-LAST:event_btnMinimizeMouseClicked
 
     private void btnMinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseEntered
         btnMinimize.setBackground(Color.gray);
         btnMinimize.setForeground(Color.white);
-        //action.mouseEntered(btnMinimize, Color.gray, Color.white);
     }//GEN-LAST:event_btnMinimizeMouseEntered
 
-    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
-        btnExit.setBackground(Color.black);
-        btnExit.setForeground(Color.white);
-        //action.mouseExit(btnExit, Color.black, Color.white);
-    }//GEN-LAST:event_btnExitMouseExited
-
     private void btnMinimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseExited
-        btnMinimize.setBackground(Color.black);
-        btnMinimize.setForeground(Color.white);
-        //action.mouseExit(btnMinimize, Color.black, Color.white);
+        btnMinimize.setBackground(new Color(215, 235, 255));
+        btnMinimize.setForeground(new Color(0, 51, 153));
     }//GEN-LAST:event_btnMinimizeMouseExited
 
-    private void panelActionsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelActionsMouseEntered
-        initX = evt.getX();
-        initY = evt.getY();
-    }//GEN-LAST:event_panelActionsMouseEntered
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_btnExitMouseClicked
+
+    private void btnExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseEntered
+        btnExit.setBackground(Color.red);
+        btnExit.setForeground(Color.white);
+    }//GEN-LAST:event_btnExitMouseEntered
+
+    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
+        btnExit.setBackground(new Color(215, 235, 255));
+        btnExit.setForeground(new Color(0, 51, 153));
+    }//GEN-LAST:event_btnExitMouseExited
 
     private void panelActionsMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelActionsMouseDragged
         int x = getLocation().x + evt.getX() - initX;
@@ -151,18 +158,10 @@ public class Plantilla extends javax.swing.JFrame {
         this.setLocation(x, y);
     }//GEN-LAST:event_panelActionsMouseDragged
 
-    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_btnExitMouseClicked
-
-    private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
-        this.setExtendedState(1);
-    }//GEN-LAST:event_btnMinimizeMouseClicked
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        //container.setPanel(new PanelOptions(),panelContainer);
-        //setDates();
-    }//GEN-LAST:event_formWindowOpened
+    private void panelActionsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelActionsMousePressed
+        initX = evt.getX();
+        initY = evt.getY();
+    }//GEN-LAST:event_panelActionsMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
