@@ -1,10 +1,9 @@
 package itin_pc.view;
 
 import itin_pc.controller.AutenticacionControlador;
-import itin_pc.seguridad.Autorizacion;
 import itin_pc.util.Excepciones;
-import itin_pc.util.SesionUsuario;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -14,7 +13,7 @@ public class Login extends javax.swing.JFrame {
     public static String user;
     public static String pass;
 
-    private AutenticacionControlador autenticacion;
+    private final AutenticacionControlador autenticacion;
 
     private int initX, initY;
 
@@ -302,11 +301,9 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSesionMouseExited
 
     private void linkNewAccountMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkNewAccountMouseEntered
-        //action.mouseEntered(linkNewAccount, null, Color.white);
     }//GEN-LAST:event_linkNewAccountMouseEntered
 
     private void linkNewAccountMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkNewAccountMouseExited
-        //action.mouseEntered(linkNewAccount, null, Color.black);
     }//GEN-LAST:event_linkNewAccountMouseExited
 
     private void btnSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSesionMouseClicked
@@ -314,14 +311,12 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSesionMouseClicked
 
     private void linkNewAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkNewAccountMouseClicked
-        //new Register().setVisible(true);
-        //this.dispose();
     }//GEN-LAST:event_linkNewAccountMouseClicked
 
     private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
-        //if(evt.getKeyChar() == KeyEvent.VK_ENTER) {
-        //    btnLogin();
-        //}
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            btnLogin();
+        }
     }//GEN-LAST:event_txtPassKeyTyped
 
     private void panelActionsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelActionsMousePressed
@@ -330,9 +325,9 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_panelActionsMousePressed
 
     private void txtUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyTyped
-        //if(evt.getKeyChar() == KeyEvent.VK_ENTER) {
-        //   btnLogin();
-        //}
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            btnLogin();
+        }
     }//GEN-LAST:event_txtUserKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -361,8 +356,14 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 
-    // Verifican que los campos de User y Pass no esten vacios
-    // Verifican si el Usuario existe en la BD
+    /**
+     * Funcion que se encarga de iniciar la sesion del usuario.
+     * 
+     * Si el login es exitoso, cierra la ventana de login
+     * y abre el menu correspondiente al tipo de usuario.
+     * 
+     * Si el login falla, muestra un mensaje de error.
+     */
     private void btnLogin() {
         user = txtUser.getText();
         pass = String.valueOf(txtPass.getPassword());
@@ -375,20 +376,20 @@ public class Login extends javax.swing.JFrame {
             AutenticacionControlador.ResultadoLogin resultado = autenticacion.loginItinPC(user, pass);
 
             switch (resultado) {
-                case ADMIN:
+                case ADMIN -> {
                     //new MenuPrincipalAdmin().setVisible(true);
                     this.dispose();
-                    break;
-                case VENDEDOR:
+                }
+                case VENDEDOR -> {
                     //new MenuPrincipalVendedor().setVisible(true);
                     this.dispose();
-                    break;
-                case TECNICO:
-                    //new MenuPrincipalTecnico().setVisible(true);
+                }
+                case TECNICO -> {//new MenuPrincipalTecnico().setVisible(true);
                     this.dispose();
-                    break;
-                default:
+                }
+                default -> {
                     JOptionPane.showMessageDialog(this, "Usuario o Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } catch (Excepciones ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
