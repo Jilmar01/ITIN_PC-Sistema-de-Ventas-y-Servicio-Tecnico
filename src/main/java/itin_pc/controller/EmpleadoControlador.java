@@ -13,8 +13,8 @@ import itin_pc.util.ValidacionDatos;
 
 public class EmpleadoControlador {
 
-    private EmpleadoDAO empleadoDAO;
-    private AuditoriaEmpleadoDAO auditoriaEmpleadoDAO;
+    private final EmpleadoDAO empleadoDAO;
+    private final AuditoriaEmpleadoDAO auditoriaEmpleadoDAO;
 
     public EmpleadoControlador() {
         empleadoDAO = new EmpleadoDAO();
@@ -37,7 +37,9 @@ public class EmpleadoControlador {
      */
     public int agregarEmpleado(Empleado empleado) throws Excepciones {
         
-        if (!Autorizacion.esAdmin(SesionUsuario.obtenerUsuarioActual().getId())) {
+        int usuarioId = SesionUsuario.obtenerUsuarioActual().getId();
+        
+        if (!Autorizacion.esAdmin(usuarioId)) {
             throw new Excepciones("Usuario sin permiso de administrador");
         }
         
@@ -93,7 +95,9 @@ public class EmpleadoControlador {
      */
     public List<ReporteEmpleados> empleadosConMasVentas() throws Excepciones {
         
-        if(!Autorizacion.esAdmin(SesionUsuario.obtenerUsuarioActual().getId())) {
+        int usuarioId = SesionUsuario.obtenerUsuarioActual().getId();
+        
+        if(!Autorizacion.esAdmin(usuarioId)) {
             throw new Excepciones("Usuario sin permiso de administrador");
         }
         
