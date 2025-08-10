@@ -96,6 +96,15 @@ Para registrar un nuevo empleado y generar automáticamente un usuario con su re
 Ejemplo de implementación:
 
 ```java
+/**
+Datos desde la Vista:
+	String Nombre,
+	Sring Apellido,
+	Sting Rol (ADMIN, VENDEDOR, TECNICO),
+	String Cargo,
+	Date Fecha de contratacion
+*/
+
 EmpleadoControlador ec = new EmpleadoControlador();
 UsuarioControlador uc = new UsuarioControlador();
 
@@ -134,6 +143,11 @@ Esto dara de baja a un empleado y registrara su respectiva auditoria.
 Ejemplo de implementación:
 
 ```java
+/**
+ Datos desde la vista:
+    Integer ID del empleado a eliminar
+ */
+
 EmpleadoControlador ec = new EmpleadoControlador();
 
 int empleadoId = 3;
