@@ -22,6 +22,22 @@ public class EmpleadoControlador {
     }
 
     /**
+     * Obtiene una lista de todos los empleados del sistema.
+     * 
+     * @return Lista de objetos Empleado con los datos de todos los empleados.
+     * @throws Excepciones si ocurre un error al obtener los empleados o si el usuario no tiene permisos.
+     */
+    public List<Empleado> obtenerEmpleados() throws Excepciones {
+        int usuarioId = SesionUsuario.obtenerUsuarioActual().getId();
+        
+        if (!Autorizacion.esAdmin(usuarioId)) {
+            throw new Excepciones("Usuario sin permiso de administrador");
+        }
+        
+        return empleadoDAO.obtenerEmpleados();
+    }
+
+    /**
      * Agrega un nuevo empleado al sistema
      * 
      * Ejemplo de uso:
@@ -37,7 +53,13 @@ public class EmpleadoControlador {
      */
     public int agregarEmpleado(Empleado empleado) throws Excepciones {
         
-        int usuarioId = SesionUsuario.obtenerUsuarioActual().getId();
+        int usuarioId = 0;
+        
+        try {
+            usuarioId = SesionUsuario.obtenerUsuarioActual().getId();
+        } catch (Exception e) {
+            throw new Excepciones("No has iniciado Sesion");
+        }
         
         if (!Autorizacion.esAdmin(usuarioId)) {
             throw new Excepciones("Usuario sin permiso de administrador");
@@ -52,6 +74,22 @@ public class EmpleadoControlador {
         int empleadoId = empleadoDAO.insertarEmpleado(empleado);
 
         return empleadoId;
+    }
+
+    /**
+     * Obtiene un empleado por su ID.
+     * 
+     * @param empleadoId ID del empleado a obtener.
+     * @return Objeto Empleado con los datos del empleado.
+     * @throws Excepciones si ocurre un error al obtener el empleado o si el usuario no tiene permisos.
+     */
+    public Empleado obtenerEmpleado(int empleadoId) throws Excepciones {
+        
+        if (!ValidacionDatos.esEntero(empleadoId)) {
+            throw new Excepciones("El ID del empleado es inválido.");
+        }
+
+        return empleadoDAO.obtenerEmpleadoPorId(empleadoId);
     }
 
     /**
@@ -102,5 +140,50 @@ public class EmpleadoControlador {
         }
         
         return empleadoDAO.obtenerNumeroDeVentasDeEmpleados();
+    }
+
+
+    /**
+     * Busca empleados por un campo específico y su valor.
+     * 
+     * @param rol Rol por el que se busca a los empleados.
+     * @return Lista de empleados que coinciden con el rol especificado.
+     * @throws Excepciones si ocurre un error al buscar los empleados o si el usuario no tiene permisos.
+     */
+    public List<Empleado> obtenerEmpleadosPorRol(String rol) throws Excepciones {
+        
+        int usuarioId = SesionUsuario.obtenerUsuarioActual().getId();
+        
+        if (!Autorizacion.esAdmin(usuarioId)) {
+            throw new Excepciones("Usuario sin permiso de administrador");
+        }
+        
+        if (!ValidacionDatos.esTextoGeneral(rol)) {
+            throw new Excepciones("El rol es inválido.");
+        }
+        
+        return empleadoDAO.buscarEmpleados("u.rol", rol);
+    }
+
+    /**
+     * Busca empleados por su nombre.
+     * 
+     * @param nombre Nombre del empleado a buscar.
+     * @return Lista de empleados que coinciden con el nombre especificado.
+     * @throws Excepciones si ocurre un error al buscar los empleados o si el usuario no tiene permisos.
+     */
+    public List<Empleado> buscarEmpleadoPorNombre(String nombre) throws Excepciones {
+        
+        int usuarioId = SesionUsuario.obtenerUsuarioActual().getId();
+        
+        if (!Autorizacion.esAdmin(usuarioId)) {
+            throw new Excepciones("Usuario sin permiso de administrador");
+        }
+        
+        if (!ValidacionDatos.esTextoGeneral(nombre)) {
+            throw new Excepciones("El nombre es inválido.");
+        }
+        
+        return empleadoDAO.buscarEmpleados("e.nombre", nombre);
     }
 }

@@ -212,4 +212,40 @@ public class EmpleadoDAO {
     }
     
 
+    /**
+     * Busca empleados por una columna específica y un valor dado.
+     * 
+     * @param columna Nombre de la columna por la que se busca.
+     * @param Valor Valor a buscar en la columna especificada.
+     * @return Lista de empleados que coinciden con la búsqueda.
+     * @throws Excepciones si ocurre un error al buscar los empleados.
+     */
+    public List<Empleado> buscarEmpleados(String columna, String Valor) throws Excepciones {
+        List<Empleado> empleados = new ArrayList<>();
+        String sql = "SELECT e.*, u.rol FROM empleados e" +
+                     " INNER JOIN usuarios u ON e.empleado_id = u.empleado_id" +
+                     " WHERE " + columna + " LIKE ?" +
+                     " ORDER BY e.apellido;";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setString(1, "%" + Valor + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Empleado e = new Empleado();
+                    e.setId(rs.getInt("empleado_id"));
+                    e.setNombre(rs.getString("nombre"));
+                    e.setApellido(rs.getString("apellido"));
+                    e.setPuesto(rs.getString("puesto"));
+                    e.setFechaContratacion(rs.getDate("fecha_contratacion"));
+                    e.setEstado(rs.getString("estado"));
+                    empleados.add(e);
+                }
+            }
+        } catch (SQLException e) {
+            throw new Excepciones("EmpleadoDAO", e.getMessage());
+        }
+
+        return empleados;
+    }
+
 }
