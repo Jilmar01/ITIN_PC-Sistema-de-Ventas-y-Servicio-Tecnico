@@ -36,6 +36,27 @@ public class UsuarioControlador {
     }
 
     /**
+     * Obtiene un usuario por su ID.
+     * 
+     * @param usuarioId ID del usuario a obtener.
+     * @return Objeto Usuario con los datos del usuario.
+     * @throws Excepciones si ocurre un error al obtener el usuario.
+     */
+    public Usuario obtenerUsuario(int usuarioId) throws Excepciones {
+        if (usuarioId <= 0) {
+            throw new Excepciones("ID de usuario inválido");
+        }
+        
+        Usuario usuario = usuarioDAO.obtenerUsuarioPorId(usuarioId);
+        
+        if (usuario == null) {
+            throw new Excepciones("Usuario no encontrado");
+        }
+        
+        return usuario;
+    }
+
+    /**
      * Genera un nombre de usuario basado en el nombre, apellido y rol del empleado.
      * 
      * @param nombre nombre del empleado
