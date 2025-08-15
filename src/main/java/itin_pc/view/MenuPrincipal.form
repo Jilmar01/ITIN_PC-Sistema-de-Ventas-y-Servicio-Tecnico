@@ -638,13 +638,23 @@
                     <Property name="useNullLayout" type="boolean" value="false"/>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="btnGestionEmpleados">
+                    <Container class="jilmar.PanelRound" name="btnGestionEmpleadoss">
                       <Properties>
-                        <Property name="opaque" type="boolean" value="false"/>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="new Color(255, 255, 255, 0)" type="code"/>
+                        </Property>
+                        <Property name="opaque" type="boolean" value="true"/>
+                        <Property name="roundBottomLeft" type="int" value="25"/>
+                        <Property name="roundBottomRight" type="int" value="25"/>
+                        <Property name="roundTopLeft" type="int" value="25"/>
+                        <Property name="roundTopRight" type="int" value="25"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGestionEmpleadosMouseClicked"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGestionEmpleadossMouseClicked"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="btnGestionEmpleadoss.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu bot&#xf3;n lo permite)&#xa;        gradiente.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        // Al salir el mouse, se vuelve al gradiente original&#xa;        gradiente.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));&#xa;    }&#xa;});"/>
+                      </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                           <AbsoluteConstraints x="0" y="0" width="300" height="120"/>
@@ -656,8 +666,9 @@
                     <Container class="javax.swing.JPanel" name="jPanel2">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="99" red="33" type="rgb"/>
+                          <Color blue="ea" green="b2" red="4" type="rgb"/>
                         </Property>
+                        <Property name="opaque" type="boolean" value="false"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -778,7 +789,7 @@
                     <Container class="javax.swing.JPanel" name="jPanel3">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="99" red="33" type="rgb"/>
+                          <Color blue="ea" green="b2" red="4" type="rgb"/>
                         </Property>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                           <Color id="Default Cursor"/>
@@ -902,7 +913,7 @@
                     <Container class="javax.swing.JPanel" name="jPanel4">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="99" red="33" type="rgb"/>
+                          <Color blue="ea" green="b2" red="4" type="rgb"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -1023,7 +1034,7 @@
                     <Container class="javax.swing.JPanel" name="jPanel5">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="99" red="33" type="rgb"/>
+                          <Color blue="ea" green="b2" red="4" type="rgb"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -1093,6 +1104,9 @@
                     </Container>
                     <Component class="jilmar.LabelRound" name="gradiente3">
                       <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ea" green="b2" red="4" type="rgb"/>
+                        </Property>
                         <Property name="roundBottomLeft" type="int" value="25"/>
                         <Property name="roundBottomRight" type="int" value="25"/>
                         <Property name="roundTopLeft" type="int" value="25"/>
@@ -1144,7 +1158,7 @@
                     <Container class="javax.swing.JPanel" name="jPanel6">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="99" red="33" type="rgb"/>
+                          <Color blue="ea" green="b2" red="4" type="rgb"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -1265,7 +1279,7 @@
                     <Container class="javax.swing.JPanel" name="jPanel7">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="99" red="33" type="rgb"/>
+                          <Color blue="ea" green="b2" red="4" type="rgb"/>
                         </Property>
                       </Properties>
                       <Constraints>

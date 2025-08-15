@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import jilmar.PanelRound;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -60,22 +61,35 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     private void funcionesVendedor() {
-        deshabilitarBoton(btnGestionEmpleados);
-        deshabilitarBoton(btnServicioTecnico);
+        deshabilitarBoton(btnGestionEmpleadoss);
+        //deshabilitarBoton(btnServicioTecnico);
     }
 
     private void funcionesTecnico() {
-        deshabilitarBoton(btnGestionEmpleados);
+        deshabilitarBoton(btnGestionEmpleadoss);
     }
 
-    private void deshabilitarBoton(JPanel boton) {
+    private void deshabilitarBoton(PanelRound boton) {
         for (MouseListener ml : boton.getMouseListeners()) {
             boton.removeMouseListener(ml);
         }
 
-        boton.setOpaque(true);
+        /*boton.setOpaque(true);
         boton.setBackground(new Color(0, 0, 0, 100));
-        boton.repaint();
+        boton.setRoundBottomLeft(25);
+        boton.setRoundBottomRight(25);
+        boton.setRoundTopLeft(25);
+        boton.setRoundTopRight(25);
+        boton.repaint();*/
+        
+        boton.setOpaque(false); // Deja que el propio panel pinte la forma redonda
+boton.setBackground(new Color(0, 0, 0, 100));
+boton.setRoundBottomLeft(25);
+boton.setRoundBottomRight(25);
+boton.setRoundTopLeft(25);
+boton.setRoundTopRight(25);
+boton.repaint();
+
     }
 
     /**
@@ -119,7 +133,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnlAcceso = new jilmar.PanelRound();
         lblAccesos = new javax.swing.JLabel();
         pnlEmpleados = new javax.swing.JPanel();
-        btnGestionEmpleados = new javax.swing.JPanel();
+        btnGestionEmpleadoss = new jilmar.PanelRound();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -421,15 +435,36 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnlEmpleados.setOpaque(false);
         pnlEmpleados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnGestionEmpleados.setOpaque(false);
-        btnGestionEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGestionEmpleadoss.setBackground(new Color(255, 255, 255, 0));
+        btnGestionEmpleadoss.setOpaque(true);
+        btnGestionEmpleadoss.setRoundBottomLeft(25);
+        btnGestionEmpleadoss.setRoundBottomRight(25);
+        btnGestionEmpleadoss.setRoundTopLeft(25);
+        btnGestionEmpleadoss.setRoundTopRight(25);
+        btnGestionEmpleadoss.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGestionEmpleadosMouseClicked(evt);
+                btnGestionEmpleadossMouseClicked(evt);
             }
         });
-        pnlEmpleados.add(btnGestionEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
-        jPanel2.setBackground(new java.awt.Color(51, 153, 255));
+        btnGestionEmpleadoss.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu botón lo permite)
+                gradiente.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                // Al salir el mouse, se vuelve al gradiente original
+                gradiente.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
+            }
+        });
+
+        pnlEmpleados.add(btnGestionEmpleadoss, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
+
+        jPanel2.setBackground(new java.awt.Color(4, 178, 234));
+        jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
@@ -474,7 +509,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         pnlVentas.add(btnGestionVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
-        jPanel3.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel3.setBackground(new java.awt.Color(4, 178, 234));
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -519,7 +554,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         pnlTecnico.add(btnServicioTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
-        jPanel4.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel4.setBackground(new java.awt.Color(4, 178, 234));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
@@ -563,7 +598,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         pnlStock.add(btnControlStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
-        jPanel5.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel5.setBackground(new java.awt.Color(4, 178, 234));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
@@ -586,6 +621,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         pnlStock.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
+        gradiente3.setBackground(new java.awt.Color(4, 178, 234));
         gradiente3.setRoundBottomLeft(25);
         gradiente3.setRoundBottomRight(25);
         gradiente3.setRoundTopLeft(25);
@@ -607,7 +643,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         pnlClientes.add(btnGestionClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
-        jPanel6.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel6.setBackground(new java.awt.Color(4, 178, 234));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
@@ -651,7 +687,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         pnlMarcas.add(btnGestionMarcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
-        jPanel7.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel7.setBackground(new java.awt.Color(4, 178, 234));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
@@ -741,11 +777,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         initY = evt.getY();
     }//GEN-LAST:event_panelActionsMousePressed
 
-    private void btnGestionEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionEmpleadosMouseClicked
-        new GestionEmpleados().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnGestionEmpleadosMouseClicked
-
     private void btnCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseEntered
         btnCerrarSesion.setBackground(new Color(4, 177, 233));
     }//GEN-LAST:event_btnCerrarSesionMouseEntered
@@ -771,8 +802,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionClientesMouseClicked
 
     private void btnGestionMarcasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionMarcasMouseClicked
-        new GestionProductos().setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_btnGestionMarcasMouseClicked
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
@@ -781,13 +811,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
+    private void btnGestionEmpleadossMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionEmpleadossMouseClicked
+       new GestionEmpleados().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_btnGestionEmpleadossMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private jilmar.LabelRound btnCerrarSesion;
     private javax.swing.JPanel btnControlStock;
     private javax.swing.JLabel btnExit;
     private javax.swing.JPanel btnGestionClientes;
-    private javax.swing.JPanel btnGestionEmpleados;
+    private jilmar.PanelRound btnGestionEmpleadoss;
     private javax.swing.JPanel btnGestionMarcas;
     private javax.swing.JPanel btnGestionVentas;
     private javax.swing.JLabel btnMinimize;
