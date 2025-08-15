@@ -187,9 +187,15 @@ public class EmpleadoDAO {
         
         List<ReporteEmpleados> reporte = new ArrayList<>();
         String sql = """
-                    SELECT e.empleado_id, e.nombre, e.apellido, COUNT(v.venta_id) AS numero_ventas
+                    SELECT 
+                        e.empleado_id, 
+                        e.nombre, 
+                        e.apellido, 
+                        COUNT(DISTINCT v.venta_id) AS numero_ventas,
+                        SUM(dv.precio_unitario * dv.cantidad) AS monto_total
                     FROM empleados e
                     INNER JOIN ventas v ON e.empleado_id = v.empleado_id
+                    INNER JOIN detalles_venta dv ON v.venta_id = dv.venta_id
                     GROUP BY e.empleado_id, e.nombre, e.apellido
                     ORDER BY numero_ventas DESC
                 """;
@@ -200,7 +206,8 @@ public class EmpleadoDAO {
                         rs.getInt("empleado_id"),
                         rs.getString("nombre"),
                         rs.getString("apellido"),
-                        rs.getInt("numero_ventas")
+                        rs.getInt("numero_ventas"),
+                        rs.getDouble("monto_total")
                 );
                 reporte.add(re);
             }
