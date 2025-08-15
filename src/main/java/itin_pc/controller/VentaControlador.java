@@ -54,4 +54,21 @@ public class VentaControlador {
         
         return ventaId;
     }
+
+
+    /**
+     * Obtiene una venta por su ID.
+     *
+     * @param id El ID de la venta a obtener.
+     * @return Un objeto Venta con los datos de la venta, o null si no se encuentra.
+     * @throws Excepciones si ocurre un error al obtener la venta o si el ID es inválido.
+     */
+    public Venta obtenerVentaPorId(int id) throws Excepciones {
+
+        if (id <= 0) {
+            throw new Excepciones("ID de venta inválido");
+        }
+
+        return ventaDAO.obtenerVentaPorId(id);
+    }
 }

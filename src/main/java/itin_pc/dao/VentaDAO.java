@@ -48,4 +48,34 @@ public class VentaDAO {
 
         return ventaId;
     }
+
+    /**
+     * Obtiene una venta por su ID.
+     *
+     * @param id El ID de la venta a obtener.
+     * @return Un objeto Venta con los datos de la venta, o null si no se encuentra.
+     * @throws Excepciones si ocurre un error al obtener la venta.
+     */
+    public Venta obtenerVentaPorId(int id) throws Excepciones {
+        String sql = "SELECT * FROM ventas WHERE venta_id = ?";
+        Venta venta = null;
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    venta = new Venta();
+                    venta.setId(rs.getInt("venta_id"));
+                    venta.setEmpleadoId(rs.getInt("empleado_id"));
+                    venta.setClienteId(rs.getInt("cliente_id"));
+                    venta.setFecha(rs.getDate("fecha"));
+                    venta.setFormaPagoId(rs.getInt("forma_pago_id"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new Excepciones("VentaDAO", e.getMessage());
+        }
+
+        return venta;
+    }
 }
