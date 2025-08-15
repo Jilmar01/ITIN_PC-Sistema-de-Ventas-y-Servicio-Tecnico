@@ -8,14 +8,13 @@ import itin_pc.util.SesionUsuario;
 import java.awt.Color;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import jilmar.PanelRound;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    private EmpleadoControlador e;
+    private final EmpleadoControlador e;
 
-    private Usuario usuario;
+    private final Usuario usuario;
     private Empleado empleado;
 
     private int usuarioId;
@@ -35,7 +34,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     private void configuracionRol() {
-        
+
         try {
             this.usuarioId = usuario.getId();
             this.empleado = e.obtenerEmpleado(usuarioId);
@@ -56,7 +55,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
 
         } catch (Excepciones ex) {
-            JOptionPane.showMessageDialog(this, "Error: "+ ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
         }
     }
 
@@ -74,22 +73,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             boton.removeMouseListener(ml);
         }
 
-        /*boton.setOpaque(true);
+        boton.setOpaque(false);
         boton.setBackground(new Color(0, 0, 0, 100));
         boton.setRoundBottomLeft(25);
         boton.setRoundBottomRight(25);
         boton.setRoundTopLeft(25);
         boton.setRoundTopRight(25);
-        boton.repaint();*/
-        
-        boton.setOpaque(false); // Deja que el propio panel pinte la forma redonda
-boton.setBackground(new Color(0, 0, 0, 100));
-boton.setRoundBottomLeft(25);
-boton.setRoundBottomRight(25);
-boton.setRoundTopLeft(25);
-boton.setRoundTopRight(25);
-boton.repaint();
-
+        boton.repaint();
     }
 
     /**
@@ -167,12 +157,12 @@ boton.repaint();
         jLabel18 = new javax.swing.JLabel();
         lblStock9 = new javax.swing.JLabel();
         gradiente4 = new jilmar.LabelRound();
-        pnlMarcas = new javax.swing.JPanel();
-        btnGestionMarcas = new javax.swing.JPanel();
+        pnlProductos = new javax.swing.JPanel();
+        btnGestionProductos = new jilmar.PanelRound();
         jPanel7 = new javax.swing.JPanel();
+        lblStock10 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        lblStock10 = new javax.swing.JLabel();
         gradiente5 = new jilmar.LabelRound();
         jLabel1 = new javax.swing.JLabel();
 
@@ -675,32 +665,41 @@ boton.repaint();
 
         pnlAcceso.add(pnlClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 300, 120));
 
-        pnlMarcas.setBackground(new java.awt.Color(102, 255, 102));
-        pnlMarcas.setOpaque(false);
-        pnlMarcas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlProductos.setBackground(new java.awt.Color(102, 255, 102));
+        pnlProductos.setOpaque(false);
+        pnlProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnGestionMarcas.setOpaque(false);
-        btnGestionMarcas.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGestionProductos.setBackground(new Color(255, 255, 255, 0));
+        btnGestionProductos.setOpaque(true);
+        btnGestionProductos.setRoundBottomLeft(25);
+        btnGestionProductos.setRoundBottomRight(25);
+        btnGestionProductos.setRoundTopLeft(25);
+        btnGestionProductos.setRoundTopRight(25);
+        btnGestionProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGestionMarcasMouseClicked(evt);
+                btnGestionProductosMouseClicked(evt);
             }
         });
-        pnlMarcas.add(btnGestionMarcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
+
+        btnGestionProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu botón lo permite)
+                gradiente5.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                // Al salir el mouse, se vuelve al gradiente original
+                gradiente5.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
+            }
+        });
+
+        pnlProductos.add(btnGestionProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
         jPanel7.setBackground(new java.awt.Color(4, 178, 234));
+        jPanel7.setOpaque(false);
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel19.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("Gestion de Marcas");
-        jPanel7.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 300, -1));
-
-        jLabel20.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Administrar marcas de productos");
-        jPanel7.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 80, 290, -1));
 
         lblStock10.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 24)); // NOI18N
         lblStock10.setForeground(new java.awt.Color(0, 51, 153));
@@ -708,16 +707,28 @@ boton.repaint();
         lblStock10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/logo_icono.png"))); // NOI18N
         jPanel7.add(lblStock10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 300, 30));
 
-        pnlMarcas.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
+        jLabel19.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("Gestion de Productos");
+        jPanel7.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 300, -1));
+
+        jLabel20.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("Administracion de productos");
+        jPanel7.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 80, 290, -1));
+
+        pnlProductos.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
         gradiente5.setRoundBottomLeft(25);
         gradiente5.setRoundBottomRight(25);
         gradiente5.setRoundTopLeft(25);
         gradiente5.setRoundTopRight(25);
         gradiente5.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
-        pnlMarcas.add(gradiente5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
+        pnlProductos.add(gradiente5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
-        pnlAcceso.add(pnlMarcas, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 200, 300, 120));
+        pnlAcceso.add(pnlProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 200, 300, 120));
 
         jPanel1.add(pnlAcceso, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 1140, 340));
 
@@ -734,8 +745,7 @@ boton.repaint();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        //container.setPanel(new PanelOptions(),panelContainer);
-        //setDates();
+
     }//GEN-LAST:event_formWindowOpened
 
     private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
@@ -786,7 +796,7 @@ boton.repaint();
     }//GEN-LAST:event_btnCerrarSesionMouseExited
 
     private void btnGestionVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionVentasMouseClicked
-        
+
     }//GEN-LAST:event_btnGestionVentasMouseClicked
 
     private void btnServicioTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnServicioTecnicoMouseClicked
@@ -801,10 +811,6 @@ boton.repaint();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGestionClientesMouseClicked
 
-    private void btnGestionMarcasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionMarcasMouseClicked
-        
-    }//GEN-LAST:event_btnGestionMarcasMouseClicked
-
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
         SesionUsuario.cerrarSesion();
         new Login().setVisible(true);
@@ -812,10 +818,14 @@ boton.repaint();
     }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
     private void btnGestionEmpleadossMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionEmpleadossMouseClicked
-       new GestionEmpleados().setVisible(true);
-       this.dispose();
+        new GestionEmpleados().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGestionEmpleadossMouseClicked
 
+    private void btnGestionProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionProductosMouseClicked
+        new GestionProductos().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGestionProductosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private jilmar.LabelRound btnCerrarSesion;
@@ -823,7 +833,7 @@ boton.repaint();
     private javax.swing.JLabel btnExit;
     private javax.swing.JPanel btnGestionClientes;
     private jilmar.PanelRound btnGestionEmpleadoss;
-    private javax.swing.JPanel btnGestionMarcas;
+    private jilmar.PanelRound btnGestionProductos;
     private javax.swing.JPanel btnGestionVentas;
     private javax.swing.JLabel btnMinimize;
     private javax.swing.JPanel btnServicioTecnico;
@@ -887,15 +897,11 @@ boton.repaint();
     private jilmar.PanelRound pnlAcceso;
     private javax.swing.JPanel pnlClientes;
     private javax.swing.JPanel pnlEmpleados;
-    private javax.swing.JPanel pnlMarcas;
+    private javax.swing.JPanel pnlProductos;
     private jilmar.PanelRound pnlResumen;
     private javax.swing.JPanel pnlStock;
     private javax.swing.JPanel pnlTecnico;
     private javax.swing.JPanel pnlVentas;
     // End of variables declaration//GEN-END:variables
 
-    // Establece los datos de la Cuenta Actual
-    public static void setDates() {
-
-    }
 }
