@@ -1,6 +1,7 @@
 package itin_pc.dao;
 
 import itin_pc.model.Cliente;
+import itin_pc.model.TipoCliente;
 import itin_pc.util.ConexionBD;
 import itin_pc.util.Excepciones;
 
@@ -148,7 +149,7 @@ public class ClienteDAO {
      * Elimina un cliente por su ID.
      * 
      * @param id ID del cliente a eliminar.
-     * @return true si se elimina correctamente, false en caso contrario. 
+     * @return true si se elimina correctamente, false en caso contrario.
      * @throws Excepciones si ocurre un error al eliminar el cliente.
      */
     public boolean eliminarCliente(int id) throws Excepciones {
@@ -168,20 +169,20 @@ public class ClienteDAO {
      * Obtiene una lista de clientes por tipo y fecha.
      * 
      * @param tipoCliente Tipo de cliente (por ejemplo, "VIP", "NORMAL").
-     * @param mes el mes para filtrar los clientes (1-12).
-     * @param anio el año para filtrar los clientes.
+     * @param mes         el mes para filtrar los clientes (1-12).
+     * @param anio        el año para filtrar los clientes.
      * @return Lista de clientes que coinciden con el tipo y fecha especificados.
      * @throws Excepciones si los datos de tipo cliente, mes o año son inválidos.
-     */ 
+     */
     public List<Cliente> obtenerClientesPorTipoYFecha(String tipoCliente, int mes, int anio) throws Excepciones {
-        
+
         String sql = """
-                        SELECT DISTINCT c.cliente_id, c.nombre, c.apellido, c.correo, c.telefono, c.tipo_cliente_id
-                        FROM clientes c
-                        INNER JOIN tipos_cliente tc ON tc.tipo_cliente_id = c.tipo_cliente_id
-                        INNER JOIN ventas v ON c.cliente_id = v.cliente_id
-                        WHERE tc.tipo = ? AND MONTH(v.fecha) = ? AND YEAR(v.fecha) = ?
-                    """;
+                    SELECT DISTINCT c.cliente_id, c.nombre, c.apellido, c.correo, c.telefono, c.tipo_cliente_id
+                    FROM clientes c
+                    INNER JOIN tipos_cliente tc ON tc.tipo_cliente_id = c.tipo_cliente_id
+                    INNER JOIN ventas v ON c.cliente_id = v.cliente_id
+                    WHERE tc.tipo = ? AND MONTH(v.fecha) = ? AND YEAR(v.fecha) = ?
+                """;
 
         List<Cliente> clientes = new ArrayList<>();
 
@@ -209,4 +210,52 @@ public class ClienteDAO {
 
         return clientes;
     }
+
+    /**
+     * Obtiene una lista de todos los tipos de cliente.
+     * 
+     * @return Lista de tipos de cliente.
+     * @throws Excepciones si ocurre un error al obtener los tipos de cliente.
+     */
+    public List<TipoCliente> obtenerTiposCliente() throws Excepciones {
+        List<TipoCliente> tipos = new ArrayList<>();
+        String sql = "SELECT * FROM tipos_cliente";
+
+        try (Statement stmt = conexion.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                TipoCliente tipo = new TipoCliente();
+                tipo.setId(rs.getInt("tipo_cliente_id"));
+                tipo.setTipo(rs.getString("tipo"));
+                tipos.add(tipo);
+            }
+
+        } catch (SQLException e) {
+            throw new Excepciones("ClienteDAO", e.getMessage());
+        }
+
+        return tipos;
+    }
+
+    
+    public TipoCliente obTipoClientePorId(int id) throws Excepciones {
+        String sql = "SELECT * FROM tipos_cliente WHERE tipo_cliente_id = ?";
+        TipoCliente tipoCliente = null;
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    tipoCliente = new TipoCliente();
+                    tipoCliente.setId(rs.getInt("tipo_cliente_id"));
+                    tipoCliente.setTipo(rs.getString("tipo"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new Excepciones("ClienteDAO", e.getMessage());
+        }
+
+        return tipoCliente;
+    }
+
 }

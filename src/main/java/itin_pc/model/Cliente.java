@@ -18,6 +18,14 @@ public class Cliente {
         this.telefono = telefono;
         this.tipoClienteId = tipoClienteId;
     }
+    
+    public Cliente(String nombre, String apellido, String correo, String telefono, int tipoClienteId) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.tipoClienteId = tipoClienteId;
+    }
 
     public int getId() {
         return id;
