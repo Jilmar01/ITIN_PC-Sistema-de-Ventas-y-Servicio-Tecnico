@@ -151,7 +151,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lblStock8 = new javax.swing.JLabel();
         gradiente3 = new jilmar.LabelRound();
         pnlClientes = new javax.swing.JPanel();
-        btnGestionClientes = new javax.swing.JPanel();
+        btnGestionClientess = new jilmar.PanelRound();
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -625,15 +625,36 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnlClientes.setOpaque(false);
         pnlClientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnGestionClientes.setOpaque(false);
-        btnGestionClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnGestionClientess.setBackground(new Color(255, 255, 255, 0));
+        btnGestionClientess.setOpaque(true);
+        btnGestionClientess.setRoundBottomLeft(25);
+        btnGestionClientess.setRoundBottomRight(25);
+        btnGestionClientess.setRoundTopLeft(25);
+        btnGestionClientess.setRoundTopRight(25);
+        btnGestionClientess.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGestionClientesMouseClicked(evt);
+                btnGestionClientessMouseClicked(evt);
             }
         });
-        pnlClientes.add(btnGestionClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
+
+        btnGestionClientess.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu botón lo permite)
+                gradiente4.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                // Al salir el mouse, se vuelve al gradiente original
+                gradiente4.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
+            }
+        });
+
+        pnlClientes.add(btnGestionClientess, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
         jPanel6.setBackground(new java.awt.Color(4, 178, 234));
+        jPanel6.setOpaque(false);
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
@@ -807,10 +828,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnControlStockMouseClicked
 
-    private void btnGestionClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionClientesMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGestionClientesMouseClicked
-
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
         SesionUsuario.cerrarSesion();
         new Login().setVisible(true);
@@ -827,11 +844,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnGestionProductosMouseClicked
 
+    private void btnGestionClientessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionClientessMouseClicked
+        new GestionClientes().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGestionClientessMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private jilmar.LabelRound btnCerrarSesion;
     private javax.swing.JPanel btnControlStock;
     private javax.swing.JLabel btnExit;
-    private javax.swing.JPanel btnGestionClientes;
+    private jilmar.PanelRound btnGestionClientess;
     private jilmar.PanelRound btnGestionEmpleadoss;
     private jilmar.PanelRound btnGestionProductos;
     private javax.swing.JPanel btnGestionVentas;

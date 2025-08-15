@@ -1,9 +1,7 @@
 package itin_pc.view;
 
-import itin_pc.ITIN_PC;
 import itin_pc.controller.EmpleadoControlador;
 import itin_pc.controller.ProductoControlador;
-import itin_pc.controller.UsuarioControlador;
 import itin_pc.model.Categoria;
 import itin_pc.model.Empleado;
 import itin_pc.model.Marca;
@@ -16,14 +14,8 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -33,7 +25,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -45,7 +36,6 @@ public class GestionProductos extends javax.swing.JFrame {
     private DefaultTableModel modeloTabla;
 
     private final EmpleadoControlador e;
-    private final UsuarioControlador u;
     private final ProductoControlador p;
 
     List<Producto> listaProductosBD;
@@ -60,7 +50,6 @@ public class GestionProductos extends javax.swing.JFrame {
     public GestionProductos() {
 
         this.e = new EmpleadoControlador();
-        this.u = new UsuarioControlador();
         this.p = new ProductoControlador();
 
         this.usuario = SesionUsuario.obtenerUsuarioActual();
@@ -780,18 +769,22 @@ public class GestionProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarFormularioMouseExited
 
     private void cmbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroActionPerformed
-        if (cmbFiltro.getSelectedItem().toString().equals("Categoria")) {
-        cmbFiltroMarcas.setSelectedIndex(0);
-            pnlFiltroCategorias.setVisible(true);
-            pnlFiltroMarcas.setVisible(false);
-        } else if (cmbFiltro.getSelectedItem().toString().equals("Marca")) {
-            cmbFiltroCategorias.setSelectedIndex(0);
-            pnlFiltroCategorias.setVisible(false);
-            pnlFiltroMarcas.setVisible(true);
-        } else {
-            pnlFiltroCategorias.setVisible(false);
-            pnlFiltroMarcas.setVisible(false);
-            verTodosLosProductos();
+        switch (cmbFiltro.getSelectedItem().toString()) {
+            case "Categoria" -> {
+                cmbFiltroMarcas.setSelectedIndex(0);
+                pnlFiltroCategorias.setVisible(true);
+                pnlFiltroMarcas.setVisible(false);
+            }
+            case "Marca" -> {
+                cmbFiltroCategorias.setSelectedIndex(0);
+                pnlFiltroCategorias.setVisible(false);
+                pnlFiltroMarcas.setVisible(true);
+            }
+            default -> {
+                pnlFiltroCategorias.setVisible(false);
+                pnlFiltroMarcas.setVisible(false);
+                verTodosLosProductos();
+            }
         }
     }//GEN-LAST:event_cmbFiltroActionPerformed
 
@@ -828,7 +821,7 @@ public class GestionProductos extends javax.swing.JFrame {
     private void agregarProducto() {
         String nombre = txtNombre.getText();
         String descripcion = txtDescripcion.getText();
-        Double precio = Double.parseDouble(txtPrecio.getText());
+        Double precio = Double.valueOf(txtPrecio.getText());
         int stock = Integer.parseInt(txtStock.getText());
         int categoriaId = ((Categoria) cmbCategorias.getSelectedItem()).getId();
         int marcaId = ((Marca) cmbMarcas.getSelectedItem()).getId();
@@ -1052,8 +1045,7 @@ public class GestionProductos extends javax.swing.JFrame {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                     boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                if (c instanceof JLabel) {
-                    JLabel label = (JLabel) c;
+                if (c instanceof JLabel label) {
                     label.setHorizontalAlignment(SwingConstants.CENTER);
                     label.setVerticalAlignment(SwingConstants.CENTER);
                     label.setFont(new java.awt.Font("JetBrains Mono SemiBold", 0, 12)); // <-- fuerza la fuente
