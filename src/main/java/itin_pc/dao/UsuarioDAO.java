@@ -118,5 +118,52 @@ public class UsuarioDAO {
 
         return usuario;
     }
+ 
+    public Usuario obtenerUsuarioPorEmpleadoId(int empleado_id) throws Excepciones {
 
+        String sql = "SELECT * FROM Usuarios WHERE empleado_id = ?";
+        Usuario usuario = null;
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, empleado_id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    usuario = new Usuario();
+                    usuario.setId(rs.getInt("usuario_id"));
+                    usuario.setNombreUsuario(rs.getString("nombre_usuario"));
+                    usuario.setClaveAcceso(rs.getString("clave_acceso"));
+                    usuario.setRol(rs.getString("rol"));
+                    usuario.setEmpleadoId(rs.getInt("empleado_id"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new Excepciones("UsuarioDAO", e.getMessage());
+        }
+
+        return usuario;
+    }
+
+        /**
+     * Actualiza los datos de un usuario en la base de datos.
+     *
+     * @param usuario Objeto Usuario con los datos actualizados.
+     * @return true si la actualización fue exitosa, false en caso contrario.
+     * @throws Excepciones si ocurre un error al actualizar el usuario.
+     */
+    public boolean actualizarUsuario(Usuario usuario) throws Excepciones {
+        String sql = "UPDATE Usuarios SET nombre_usuario = ?, clave_acceso = ?, rol = ?, empleado_id = ? WHERE usuario_id = ?";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setString(1, usuario.getNombreUsuario());
+            ps.setString(2, usuario.getClaveAcceso());
+            ps.setString(3, usuario.getRol());
+            ps.setInt(4, usuario.getEmpleadoId());
+            ps.setInt(5, usuario.getId());
+
+            int filas = ps.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            throw new Excepciones("UsuarioDAO", e.getMessage());
+        }
+    }
 }

@@ -62,10 +62,11 @@ public class ProductoControlador {
      * Metodo para actualizar un producto y su stock
      * 
      * @param producto Objeto Producto con los datos actualizados
+     * @param cantidad Cantidad de stock del producto a actualizar
      * @return true si la actualización fue exitosa, false en caso contrario
      * @throws Excepciones si los datos del producto son inválidos o el ID no es válido
      */
-    public boolean actualizarProducto(Producto producto) throws Excepciones {
+    public boolean actualizarProducto(Producto producto, int cantidad) throws Excepciones {
         
         if(!ValidacionDatos.esEntero(producto.getId())) {
             throw new Excepciones("El ID del producto no es válido.");
@@ -80,6 +81,12 @@ public class ProductoControlador {
                 || !ValidacionDatos.esEntero(producto.getCategoriaId())) {
             throw new Excepciones("La marca o categoría del producto no son válidas.");
         }
+        
+        if(cantidad <= 0) {
+            throw new Excepciones("La cantidad del producto debe ser mayor a cero.");
+        }
+        
+            productoDAO.actualizarStock(producto.getId(), cantidad);
 
         return productoDAO.actualizarProducto(producto);
     }
@@ -95,6 +102,9 @@ public class ProductoControlador {
         if (!ValidacionDatos.esEntero(productoId)) {
             throw new Excepciones("El ID del producto no es válido.");
         }
+            
+            productoDAO.eliminarStock(productoId);
+        
         return productoDAO.eliminarProducto(productoId);
     }
 
@@ -129,5 +139,33 @@ public class ProductoControlador {
      */
     public List<Marca> obtenerMarcas() throws Excepciones {
         return productoDAO.obtenerMarcas();
+    }
+
+        /**
+     * Obtiene un producto por su ID.
+     * 
+     * @param productoId ID del producto a obtener.
+     * @return Objeto Producto con los datos del producto.
+     * @throws Excepciones si el ID no es válido o ocurre un error al obtener el producto.
+     */
+    public Producto obtenerProductoPorId(int productoId) throws Excepciones {
+        if (!ValidacionDatos.esEntero(productoId)) {
+            throw new Excepciones("El ID del producto no es válido.");
+        }
+        return productoDAO.obtenerProductoPorId(productoId);
+    }
+
+        /**
+     * Obtiene el stock actual de un producto por su ID.
+     * 
+     * @param productoId ID del producto.
+     * @return Cantidad de stock disponible, o -1 si no existe.
+     * @throws Excepciones si el ID no es válido o ocurre un error al consultar el stock.
+     */
+    public int obtenerStockPorProductoId(int productoId) throws Excepciones {
+        if (!ValidacionDatos.esEntero(productoId)) {
+            throw new Excepciones("El ID del producto no es válido.");
+        }
+        return productoDAO.obtenerStockPorProductoId(productoId);
     }
 }

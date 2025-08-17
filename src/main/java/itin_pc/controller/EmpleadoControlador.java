@@ -186,4 +186,34 @@ public class EmpleadoControlador {
         
         return empleadoDAO.buscarEmpleados("e.nombre", nombre);
     }
+
+    /**
+     * Actualiza los datos de un empleado en el sistema.
+     * 
+     * @param empleado Objeto Empleado con los datos actualizados.
+     * @return true si la actualización fue exitosa, false en caso contrario.
+     * @throws Excepciones si los datos son inválidos, el usuario no tiene permisos o ocurre un error en la actualización.
+     */
+    public boolean actualizarEmpleado(Empleado empleado) throws Excepciones {
+        int usuarioId;
+        try {
+            usuarioId = SesionUsuario.obtenerUsuarioActual().getId();
+        } catch (Exception e) {
+            throw new Excepciones("No has iniciado Sesion");
+        }
+
+        if (!Autorizacion.esAdmin(usuarioId)) {
+            throw new Excepciones("Usuario sin permiso de administrador");
+        }
+
+        if (empleado == null ||
+            empleado.getId() <= 0 ||
+            !ValidacionDatos.esSoloTexto(empleado.getNombre()) ||
+            !ValidacionDatos.esSoloTexto(empleado.getApellido()) ||
+            !ValidacionDatos.esSoloTexto(empleado.getPuesto())) {
+            throw new Excepciones("Los datos del empleado están incompletos o son inválidos.");
+        }
+
+        return empleadoDAO.actualizarEmpleado(empleado);
+    }
 }

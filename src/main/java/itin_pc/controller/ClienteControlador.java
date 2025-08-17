@@ -55,14 +55,14 @@ public class ClienteControlador {
      * @return Lista de clientes VIP
      * @throws Excepciones si los datos del mes o año son inválidos
      */
-    public List<Cliente> obtenerClientesVIP(int mes, int anio) throws Excepciones {
+    public List<Cliente> obtenerClientesPorTipo(String tipoCliente, int mes, int anio) throws Excepciones {
 
         if (!ValidacionDatos.esMesValido(mes)
                 || !ValidacionDatos.esAnioValido(anio)) {
             throw new Excepciones("Datos de mes o año inválidos.");
         }
 
-        return clienteDAO.obtenerClientesPorTipoYFecha("VIP", mes, anio);
+        return clienteDAO.obtenerClientesPorTipoYFecha(tipoCliente, mes, anio);
 
     }
 

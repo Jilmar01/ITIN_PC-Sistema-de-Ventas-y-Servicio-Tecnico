@@ -23,7 +23,7 @@ public class ProductoDAO {
 
     /**
      * Obtiene una lista de todos los productos.
-     * 
+     *
      * @return Lista de productos
      * @throws Excepciones si ocurre un error al obtener los productos.
      */
@@ -54,13 +54,13 @@ public class ProductoDAO {
 
     /**
      * Inserta un nuevo producto en la base de datos.
-     * 
+     *
      * @param producto Objeto Producto con los datos a insertar.
      * @return ID del producto insertado, o -1 si no se pudo insertar.
      * @throws Excepciones si ocurre un error al insertar el producto.
      */
     public int insertarProducto(Producto producto) throws Excepciones {
-        
+
         String sql = "INSERT INTO productos (nombre, marca_id, categoria_id, descripcion, precio) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -80,24 +80,25 @@ public class ProductoDAO {
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
                     return rs.getInt(1);
-                } 
+                }
             }
         } catch (SQLException e) {
             throw new Excepciones("ProductoDAO", e.getMessage());
         }
-        
+
         return -1;
     }
 
     /**
      * Obtiene un producto por su ID.
-     * 
+     *
      * @param producto_id ID del producto a buscar.
-     * @return Producto con los datos del producto encontrado, o null si no existe.
+     * @return Producto con los datos del producto encontrado, o null si no
+     * existe.
      * @throws Excepciones si ocurre un error al obtener el producto.
      */
     public Producto obtenerProductoPorId(int producto_id) throws Excepciones {
-        
+
         String sql = "SELECT * FROM productos WHERE producto_id = ?";
         Producto producto = null;
 
@@ -124,7 +125,7 @@ public class ProductoDAO {
 
     /**
      * Actualiza un producto en la base de datos.
-     * 
+     *
      * @param producto Objeto Producto con los nuevos datos.
      * @return true si se actualiza correctamente, false en caso contrario.
      * @throws Excepciones si ocurre un error al actualizar el producto.
@@ -149,13 +150,13 @@ public class ProductoDAO {
 
     /**
      * Elimina un producto por su ID.
-     * 
+     *
      * @param idProducto ID del producto a eliminar.
      * @return true si se elimina correctamente, false en caso contrario.
      * @throws Excepciones si ocurre un error al eliminar el producto.
      */
     public boolean eliminarProducto(int idProducto) throws Excepciones {
-        
+
         String sql = "DELETE FROM productos WHERE producto_id = ?";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -167,20 +168,21 @@ public class ProductoDAO {
             throw new Excepciones("ProductoDAO", e.getMessage());
         }
     }
-    
+
     /**
      * Verifica si un producto existe por su ID.
-     * 
+     *
      * @param idProducto ID del producto a verificar.
      * @return true si el producto existe, false en caso contrario.
-     * @throws Excepciones si ocurre un error al verificar la existencia del producto.
+     * @throws Excepciones si ocurre un error al verificar la existencia del
+     * producto.
      */
     public boolean existeProducto(int idProducto) throws Excepciones {
         String sql = "SELECT COUNT(*) FROM productos WHERE producto_id = ?";
-        
+
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setInt(1, idProducto);
-            
+
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt(1) > 0;
@@ -189,15 +191,14 @@ public class ProductoDAO {
         } catch (SQLException e) {
             throw new Excepciones("ProductoDAO", e.getMessage());
         }
-        
+
         return false;
     }
 
     //METODOS CON CATEGORIA
-    
     /**
      * Obtiene una lista de todas las categorías.
-     * 
+     *
      * @return Lista de categorías.
      * @throws Excepciones si ocurre un error al obtener las categorías.
      */
@@ -224,10 +225,10 @@ public class ProductoDAO {
             throw new Excepciones("ProductoDAO", e.getMessage());
         }
     }
-    
+
     /**
      * Obtiene una lista de productos por categoría.
-     * 
+     *
      * @param categoria Nombre de la categoría a filtrar.
      * @return Lista de productos que pertenecen a la categoría especificada.
      * @throws Excepciones si ocurre un error al obtener los productos.
@@ -262,7 +263,7 @@ public class ProductoDAO {
 
     /**
      * Obtiene una lista de todas las marcas.
-     * 
+     *
      * @return Lista de marcas.
      * @throws Excepciones si ocurre un error al obtener las marcas.
      */
@@ -290,17 +291,17 @@ public class ProductoDAO {
             throw new Excepciones("ProductoDAO", e.getMessage());
         }
     }
-    
+
     /**
      * Actualiza el stock de un producto.
-     * 
+     *
      * @param productoId ID del producto a actualizar.
      * @param cantidad Cantidad a agregar al stock.
      * @return true si se actualiza correctamente, false en caso contrario.
      * @throws Excepciones
      */
     public boolean actualizarStock(int productoId, int cantidad) throws Excepciones {
-        String sql = "UPDATE productos SET stock = stock + ? WHERE producto_id = ?";
+        String sql = "UPDATE stock SET cantidad = ? WHERE producto_id = ?";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setInt(1, cantidad);
@@ -312,17 +313,17 @@ public class ProductoDAO {
             throw new Excepciones("ProductoDAO", e.getMessage());
         }
     }
-    
+
     /**
      * Inserta un nuevo registro de stock para un producto.
-     * 
+     *
      * @param producto_id ID del producto al que se le agrega el stock.
      * @param cantidad Cantidad de stock a agregar.
      * @return ID del registro de stock insertado, o -1 si no se pudo insertar.
      * @throws Excepciones si ocurre un error al insertar el stock.
      */
     public int insertarStock(int producto_id, int cantidad) throws Excepciones {
-        
+
         String sql = "INSERT INTO stock (cantidad, producto_id) VALUES (?, ?)";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -343,9 +344,43 @@ public class ProductoDAO {
         } catch (SQLException e) {
             throw new Excepciones("ProductoDAO", e.getMessage());
         }
-        
+
         return -1;
     }
-        
-    
+
+    /**
+     * Obtiene el stock actual de un producto por su ID.
+     *
+     * @param productoId ID del producto.
+     * @return Cantidad de stock disponible, o -1 si no existe.
+     * @throws Excepciones si ocurre un error al consultar el stock.
+     */
+    public int obtenerStockPorProductoId(int productoId) throws Excepciones {
+        String sql = "SELECT cantidad FROM stock WHERE producto_id = ?";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, productoId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("cantidad");
+                }
+            }
+        } catch (SQLException e) {
+            throw new Excepciones("ProductoDAO", e.getMessage());
+        }
+        return -1;
+    }
+
+    public boolean eliminarStock(int productoId) throws Excepciones {
+        String sql = "DELETE FROM stock WHERE producto_id = ?";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, productoId);
+
+            int filas = ps.executeUpdate();
+            return filas > 0; 
+        } catch (SQLException e) {
+            throw new Excepciones("ProductoDAO", e.getMessage());
+        }
+    }
+
 }
