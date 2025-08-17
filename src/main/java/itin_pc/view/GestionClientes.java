@@ -1,15 +1,10 @@
 package itin_pc.view;
 
-import itin_pc.ITIN_PC;
 import itin_pc.controller.ClienteControlador;
 import itin_pc.controller.EmpleadoControlador;
-import itin_pc.controller.ProductoControlador;
-import itin_pc.controller.UsuarioControlador;
 import itin_pc.model.Categoria;
 import itin_pc.model.Cliente;
 import itin_pc.model.Empleado;
-import itin_pc.model.Marca;
-import itin_pc.model.Producto;
 import itin_pc.model.TipoCliente;
 import itin_pc.model.Usuario;
 import itin_pc.util.Excepciones;
@@ -19,14 +14,8 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -36,7 +25,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -48,8 +36,6 @@ public class GestionClientes extends javax.swing.JFrame {
     private DefaultTableModel modeloTabla;
 
     private final EmpleadoControlador e;
-    private final UsuarioControlador u;
-    private final ProductoControlador p;
     private final ClienteControlador c;
 
     List<Cliente> listaClientesBD;
@@ -65,8 +51,6 @@ public class GestionClientes extends javax.swing.JFrame {
     public GestionClientes() {
 
         this.e = new EmpleadoControlador();
-        this.u = new UsuarioControlador();
-        this.p = new ProductoControlador();
         this.c = new ClienteControlador();
 
         this.usuario = SesionUsuario.obtenerUsuarioActual();
@@ -74,7 +58,6 @@ public class GestionClientes extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         aplicarComboBox();
-        System.out.println("Hola 2");
 
         this.bandera = false;
 
@@ -82,7 +65,6 @@ public class GestionClientes extends javax.swing.JFrame {
 
         configuracionRol();
 
-        //aplicarFiltros();
         verTodosLosClientes();
     }
 
@@ -168,7 +150,8 @@ public class GestionClientes extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new jilmar.LabelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProductos = new javax.swing.JTable();
+        tblClientes = new javax.swing.JTable();
+        btnReportes = new jilmar.LabelRound();
         jLabel1 = new javax.swing.JLabel();
         panelActions = new javax.swing.JPanel();
         lblIcon = new javax.swing.JLabel();
@@ -217,7 +200,7 @@ public class GestionClientes extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Computadores y Componentes");
+        jLabel4.setText("Administracion de clientes");
         panelRound14.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 45, -1, -1));
 
         lblUser.setFont(new java.awt.Font("JetBrains Mono NL ExtraBold", 0, 14)); // NOI18N
@@ -443,7 +426,7 @@ public class GestionClientes extends javax.swing.JFrame {
 
         lblAccesos.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 20)); // NOI18N
         lblAccesos.setForeground(new java.awt.Color(0, 51, 153));
-        lblAccesos.setText("Productos Registrados");
+        lblAccesos.setText("Clientes Registrados");
         pnlListaEmpleados.add(lblAccesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
@@ -520,7 +503,7 @@ public class GestionClientes extends javax.swing.JFrame {
         });
         pnlListaEmpleados.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 130, 40));
 
-        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -531,14 +514,44 @@ public class GestionClientes extends javax.swing.JFrame {
                 "ID", "Nombre", "Usuario", "Rol", "Fecha Ingreso", "Aciones"
             }
         ));
-        tblProductos.setEnabled(false);
-        tblProductos.setOpaque(false);
-        jScrollPane1.setViewportView(tblProductos);
-        if (tblProductos.getColumnModel().getColumnCount() > 0) {
-            tblProductos.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tblClientes.setEnabled(false);
+        tblClientes.setOpaque(false);
+        jScrollPane1.setViewportView(tblClientes);
+        if (tblClientes.getColumnModel().getColumnCount() > 0) {
+            tblClientes.getColumnModel().getColumn(0).setPreferredWidth(10);
         }
 
-        pnlListaEmpleados.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 690, 360));
+        pnlListaEmpleados.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 690, 290));
+
+        btnReportes.setBackground(new java.awt.Color(0, 204, 255));
+        btnReportes.setForeground(new java.awt.Color(255, 255, 255));
+        btnReportes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnReportes.setText("Reporte Clientes");
+        btnReportes.setFont(new java.awt.Font("JetBrains Mono NL SemiBold", 0, 14)); // NOI18N
+        btnReportes.setRoundBottomLeft(40);
+        btnReportes.setRoundBottomRight(40);
+        btnReportes.setRoundTopLeft(40);
+        btnReportes.setRoundTopRight(40);
+        btnReportes.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
+        btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportesMouseClicked(evt);
+            }
+        });
+        btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu botón lo permite)
+                btnReportes.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                // Al salir el mouse, se vuelve al gradiente original
+                btnReportes.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
+            }
+        });
+        pnlListaEmpleados.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 460, 180, 40));
 
         jPanel1.add(pnlListaEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 750, 530));
 
@@ -715,6 +728,11 @@ public class GestionClientes extends javax.swing.JFrame {
         txtBuscar.setText("Buscar por nombre...");
     }//GEN-LAST:event_cmbFiltroMouseClicked
 
+    private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
+        new ReportesCliente().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnReportesMouseClicked
+
     private void agregarCliente() {
         String nombre = txtNombre.getText();
         String apellido = txtNombre.getText();
@@ -750,10 +768,7 @@ public class GestionClientes extends javax.swing.JFrame {
 
         String filtroNombreInput = txtBuscar.getText();
         int filtro = ((TipoCliente) cmbFiltro.getSelectedItem()).getId();
-        //int filtroCategoria = ((Categoria) cmbFiltroCategorias.getSelectedItem()).getId();
-        //int filtroMarca = ((Marca) cmbFiltroMarcas.getSelectedItem()).getId();
 
-        System.out.println("2");
         final String filtroNombre
                 = (filtroNombreInput.equals("Buscar por nombre...") || filtroNombreInput.isEmpty())
                 ? ""
@@ -803,7 +818,7 @@ public class GestionClientes extends javax.swing.JFrame {
             };
             modeloTabla.addRow(fila);
         }
-        tblProductos.setModel(modeloTabla);
+        tblClientes.setModel(modeloTabla);
     }
 
     private String tipoCliente(int tipoClienteId) {
@@ -827,6 +842,7 @@ public class GestionClientes extends javax.swing.JFrame {
     private javax.swing.JLabel btnExit;
     private jilmar.LabelRound btnLimpiarFormulario;
     private javax.swing.JLabel btnMinimize;
+    private jilmar.LabelRound btnReportes;
     private jilmar.LabelRound btnVolverMenu;
     private javax.swing.JComboBox<TipoCliente> cmbFiltro;
     private javax.swing.JComboBox<TipoCliente> cmbTipoCliente;
@@ -860,7 +876,7 @@ public class GestionClientes extends javax.swing.JFrame {
     private jilmar.PanelRound panelRound6;
     private jilmar.PanelRound pnlListaEmpleados;
     private jilmar.PanelRound pnlRegistroEmpleado;
-    private javax.swing.JTable tblProductos;
+    private javax.swing.JTable tblClientes;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtEmail;
@@ -870,8 +886,6 @@ public class GestionClientes extends javax.swing.JFrame {
 
     // Propiedasdes de la tabla
     private void propiedadTabla() {
-        System.out.println("Hola");
-
         String[] columnas = {"ID", "Nombre", "telefono", "Correo", "Tipo Cliente", "Acciones"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
@@ -880,35 +894,35 @@ public class GestionClientes extends javax.swing.JFrame {
             }
         };
 
-        tblProductos = new JTable(modeloTabla);
-        tblProductos.setRowHeight(36);
-        tblProductos.setFont(new java.awt.Font("JetBrains Mono SemiBoldd", 0, 12));
-        tblProductos.getTableHeader().setFont(new java.awt.Font("JetBrains Mono ExtraBold", 1, 12));
-        tblProductos.getTableHeader().setBackground(new Color(4, 178, 234));
-        tblProductos.getTableHeader().setForeground(Color.white);
-        tblProductos.getTableHeader().setPreferredSize(new Dimension(100, 36));
+        tblClientes = new JTable(modeloTabla);
+        tblClientes.setRowHeight(36);
+        tblClientes.setFont(new java.awt.Font("JetBrains Mono SemiBoldd", 0, 12));
+        tblClientes.getTableHeader().setFont(new java.awt.Font("JetBrains Mono ExtraBold", 1, 12));
+        tblClientes.getTableHeader().setBackground(new Color(4, 178, 234));
+        tblClientes.getTableHeader().setForeground(Color.white);
+        tblClientes.getTableHeader().setPreferredSize(new Dimension(100, 36));
 
-        jScrollPane1.setViewportView(tblProductos);
+        jScrollPane1.setViewportView(tblClientes);
 
         // Configurar el ancho de las columnas
-        if (tblProductos.getColumnModel().getColumnCount() > 0) {
-            tblProductos.getColumnModel().getColumn(0).setPreferredWidth(2);
-            tblProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
-            tblProductos.getColumnModel().getColumn(2).setPreferredWidth(40);
-            tblProductos.getColumnModel().getColumn(3).setPreferredWidth(70);
-            tblProductos.getColumnModel().getColumn(4).setPreferredWidth(35);
-            tblProductos.getColumnModel().getColumn(5).setPreferredWidth(120);
+        if (tblClientes.getColumnModel().getColumnCount() > 0) {
+            tblClientes.getColumnModel().getColumn(0).setPreferredWidth(2);
+            tblClientes.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblClientes.getColumnModel().getColumn(2).setPreferredWidth(40);
+            tblClientes.getColumnModel().getColumn(3).setPreferredWidth(70);
+            tblClientes.getColumnModel().getColumn(4).setPreferredWidth(35);
+            tblClientes.getColumnModel().getColumn(5).setPreferredWidth(120);
         }
 
         // Agregar renderer personalizado para la columna de rol
-        tblProductos.getColumnModel().getColumn(2).setCellRenderer(new RolCellRenderer());
+        tblClientes.getColumnModel().getColumn(2).setCellRenderer(new RolCellRenderer());
 
         // Agregar renderer y editor personalizado para la columna de acciones
-        tblProductos.getColumnModel().getColumn(5).setCellRenderer(new AccionesCellRenderer());
-        tblProductos.getColumnModel().getColumn(5).setCellEditor(new AccionesCellEditor());
+        tblClientes.getColumnModel().getColumn(5).setCellRenderer(new AccionesCellRenderer());
+        tblClientes.getColumnModel().getColumn(5).setCellEditor(new AccionesCellEditor());
 
         // Centrar el texto de las celdas
-        tblProductos.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+        tblClientes.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                     boolean hasFocus, int row, int column) {

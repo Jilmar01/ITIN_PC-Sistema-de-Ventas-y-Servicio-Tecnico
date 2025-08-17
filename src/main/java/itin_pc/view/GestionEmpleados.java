@@ -1,6 +1,5 @@
 package itin_pc.view;
 
-import itin_pc.ITIN_PC;
 import itin_pc.controller.EmpleadoControlador;
 import itin_pc.controller.UsuarioControlador;
 import itin_pc.model.Empleado;
@@ -12,9 +11,6 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -57,8 +53,6 @@ public class GestionEmpleados extends javax.swing.JFrame {
         propiedadTabla();
 
         configuracionRol();
-
-        //aplicarFiltros();
 
         verTodosLosEmpleados();
     }
@@ -700,6 +694,8 @@ public class GestionEmpleados extends javax.swing.JFrame {
             }
 
             limpiarFormulario();
+            
+            verTodosLosEmpleados();
 
         } catch (Excepciones ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -761,13 +757,15 @@ public class GestionEmpleados extends javax.swing.JFrame {
             modeloTabla.setRowCount(0);
 
             for (Empleado empleado : listaEmpleados) {
-                Object[] fila = {
-                    empleado.getId(),
-                    empleado.getNombre() + " " + empleado.getApellido(),
-                    u.obtenerUsuario(empleado.getId()).getRol(),
-                    empleado.getFechaContratacion()
-                };
+                if (empleado.getEstado().equals("ACTIVO")) {
+                    Object[] fila = {
+                        empleado.getId(),
+                        empleado.getNombre() + " " + empleado.getApellido(),
+                        u.obtenerUsuario(empleado.getId()).getRol(),
+                        empleado.getFechaContratacion()
+                    };
                 modeloTabla.addRow(fila);
+                }
             }
 
             tblEmpleados.setModel(modeloTabla);
@@ -864,8 +862,7 @@ public class GestionEmpleados extends javax.swing.JFrame {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                if (c instanceof JLabel) {
-                    JLabel label = (JLabel) c;
+                if (c instanceof JLabel label) {
                     label.setHorizontalAlignment(SwingConstants.CENTER);
                     label.setVerticalAlignment(SwingConstants.CENTER);
                     label.setFont(new java.awt.Font("JetBrains Mono SemiBold", 0, 12));
@@ -884,11 +881,10 @@ public class GestionEmpleados extends javax.swing.JFrame {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-            if (c instanceof JLabel) {
-                JLabel label = (JLabel) c;
+            if (c instanceof JLabel label) {
                 label.setFont(new java.awt.Font("JetBrains Mono SemiBold", 0, 12));
             }
-            
+
             String rol = value.toString();
             setHorizontalAlignment(SwingConstants.CENTER);
             setOpaque(true);
@@ -994,9 +990,15 @@ public class GestionEmpleados extends javax.swing.JFrame {
             btnEliminar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
             btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    //editarEmpleado(filaActual);
+                    int fila = tblEmpleados.getSelectedRow();
+                    if (fila != -1) {
+                        int idEmpleado = (int) tblEmpleados.getValueAt(fila, 0);
+                        new ActualizarEmpleado(idEmpleado).setVisible(true);
+                    }
+                    verTodosLosEmpleados();
                     fireEditingStopped();
                 }
 
@@ -1014,7 +1016,40 @@ public class GestionEmpleados extends javax.swing.JFrame {
             btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    //new Plantilla().setVisible(true);
+                    int fila = tblEmpleados.getSelectedRow();
+                    if (fila != -1) {
+                        int idEmpleado = (int) tblEmpleados.getValueAt(fila, 0);
+
+                        // Primero preguntamos si realmente quiere eliminar
+                        int confirmar = JOptionPane.showConfirmDialog(null,
+                                "¿Seguro que quieres eliminar este empleado?",
+                                "Confirmar eliminación",
+                                JOptionPane.YES_NO_OPTION);
+
+                        if (confirmar == JOptionPane.YES_OPTION) {
+                            // Preguntamos por la acción: Despido o Renuncia
+                            String[] opciones = {"Despido", "Renuncia"};
+                            String accion = (String) JOptionPane.showInputDialog(null,
+                                    "Seleccione la acción:",
+                                    "Acción del empleado",
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null,
+                                    opciones,
+                                    opciones[0]); // por defecto "Despido"
+
+                            if (accion != null) { // si no canceló
+                                try {
+                                    e.eliminarEmpleado(idEmpleado, accion);
+                                    JOptionPane.showMessageDialog(null,
+                                            "Empleado eliminado con éxito.");
+                                } catch (Excepciones ex) {
+                                    JOptionPane.showMessageDialog(null,
+                                            "Error al eliminar empleado:\n" + ex.getMessage());
+                                }
+                            }
+                        }
+                    }
+                    verTodosLosEmpleados();
                     fireEditingStopped();
                 }
 

@@ -129,27 +129,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         lblStock5 = new javax.swing.JLabel();
         gradiente = new jilmar.LabelRound();
-        pnlVentas = new javax.swing.JPanel();
-        btnGestionVentas = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        lblStock6 = new javax.swing.JLabel();
-        gradiente1 = new jilmar.LabelRound();
-        pnlTecnico = new javax.swing.JPanel();
-        btnServicioTecnico = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        lblStock7 = new javax.swing.JLabel();
-        gradiente2 = new jilmar.LabelRound();
-        pnlStock = new javax.swing.JPanel();
-        btnControlStock = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        lblStock8 = new javax.swing.JLabel();
-        gradiente3 = new jilmar.LabelRound();
         pnlClientes = new javax.swing.JPanel();
         btnGestionClientess = new jilmar.PanelRound();
         jPanel6 = new javax.swing.JPanel();
@@ -419,7 +398,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lblAccesos.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 20)); // NOI18N
         lblAccesos.setForeground(new java.awt.Color(0, 51, 153));
         lblAccesos.setText("Acceso Rápido - Funciones Principales");
-        pnlAcceso.add(lblAccesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        pnlAcceso.add(lblAccesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         pnlEmpleados.setBackground(new java.awt.Color(102, 255, 102));
         pnlEmpleados.setOpaque(false);
@@ -484,142 +463,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gradiente.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
         pnlEmpleados.add(gradiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
-        pnlAcceso.add(pnlEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 300, 120));
-
-        pnlVentas.setBackground(new java.awt.Color(102, 255, 102));
-        pnlVentas.setOpaque(false);
-        pnlVentas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnGestionVentas.setEnabled(false);
-        btnGestionVentas.setOpaque(false);
-        btnGestionVentas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGestionVentasMouseClicked(evt);
-            }
-        });
-        pnlVentas.add(btnGestionVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
-
-        jPanel3.setBackground(new java.awt.Color(4, 178, 234));
-        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel10.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Gestion de Ventas");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 300, -1));
-
-        jLabel15.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Procesar órdenes de compra");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 80, 290, -1));
-
-        lblStock6.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 24)); // NOI18N
-        lblStock6.setForeground(new java.awt.Color(0, 51, 153));
-        lblStock6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblStock6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/logo_icono.png"))); // NOI18N
-        jPanel3.add(lblStock6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 300, 30));
-
-        pnlVentas.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
-
-        gradiente1.setRoundBottomLeft(25);
-        gradiente1.setRoundBottomRight(25);
-        gradiente1.setRoundTopLeft(25);
-        gradiente1.setRoundTopRight(25);
-        gradiente1.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
-        pnlVentas.add(gradiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
-
-        pnlAcceso.add(pnlVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 300, 120));
-
-        pnlTecnico.setBackground(new java.awt.Color(102, 255, 102));
-        pnlTecnico.setOpaque(false);
-        pnlTecnico.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnServicioTecnico.setOpaque(false);
-        btnServicioTecnico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnServicioTecnicoMouseClicked(evt);
-            }
-        });
-        pnlTecnico.add(btnServicioTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
-
-        jPanel4.setBackground(new java.awt.Color(4, 178, 234));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Servicio Tecnico");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 300, -1));
-
-        jLabel16.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Mantenimineto y reparaciones");
-        jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 80, 290, -1));
-
-        lblStock7.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 24)); // NOI18N
-        lblStock7.setForeground(new java.awt.Color(0, 51, 153));
-        lblStock7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblStock7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/logo_icono.png"))); // NOI18N
-        jPanel4.add(lblStock7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 300, 30));
-
-        pnlTecnico.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
-
-        gradiente2.setRoundBottomLeft(25);
-        gradiente2.setRoundBottomRight(25);
-        gradiente2.setRoundTopLeft(25);
-        gradiente2.setRoundTopRight(25);
-        gradiente2.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
-        pnlTecnico.add(gradiente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
-
-        pnlAcceso.add(pnlTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, 300, 120));
-
-        pnlStock.setBackground(new java.awt.Color(102, 255, 102));
-        pnlStock.setOpaque(false);
-        pnlStock.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnControlStock.setOpaque(false);
-        btnControlStock.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnControlStockMouseClicked(evt);
-            }
-        });
-        pnlStock.add(btnControlStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
-
-        jPanel5.setBackground(new java.awt.Color(4, 178, 234));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel12.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 16)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Control de Stock");
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 300, -1));
-
-        jLabel17.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("Consultal existencia");
-        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 80, 290, -1));
-
-        lblStock8.setFont(new java.awt.Font("JetBrains Mono ExtraBold", 0, 24)); // NOI18N
-        lblStock8.setForeground(new java.awt.Color(0, 51, 153));
-        lblStock8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblStock8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/logo_icono.png"))); // NOI18N
-        jPanel5.add(lblStock8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 300, 30));
-
-        pnlStock.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
-
-        gradiente3.setBackground(new java.awt.Color(4, 178, 234));
-        gradiente3.setRoundBottomLeft(25);
-        gradiente3.setRoundBottomRight(25);
-        gradiente3.setRoundTopLeft(25);
-        gradiente3.setRoundTopRight(25);
-        gradiente3.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
-        pnlStock.add(gradiente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
-
-        pnlAcceso.add(pnlStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 300, 120));
+        pnlAcceso.add(pnlEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 300, 120));
 
         pnlClientes.setBackground(new java.awt.Color(102, 255, 102));
         pnlClientes.setOpaque(false);
@@ -684,7 +528,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gradiente4.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
         pnlClientes.add(gradiente4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
-        pnlAcceso.add(pnlClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 300, 120));
+        pnlAcceso.add(pnlClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 300, 120));
 
         pnlProductos.setBackground(new java.awt.Color(102, 255, 102));
         pnlProductos.setOpaque(false);
@@ -749,7 +593,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gradiente5.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
         pnlProductos.add(gradiente5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 120));
 
-        pnlAcceso.add(pnlProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 200, 300, 120));
+        pnlAcceso.add(pnlProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 100, 300, 120));
 
         jPanel1.add(pnlAcceso, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 1140, 340));
 
@@ -816,18 +660,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnCerrarSesion.setBackground(new Color(11, 61, 120));
     }//GEN-LAST:event_btnCerrarSesionMouseExited
 
-    private void btnGestionVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionVentasMouseClicked
-
-    }//GEN-LAST:event_btnGestionVentasMouseClicked
-
-    private void btnServicioTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnServicioTecnicoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnServicioTecnicoMouseClicked
-
-    private void btnControlStockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnControlStockMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnControlStockMouseClicked
-
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
         SesionUsuario.cerrarSesion();
         new Login().setVisible(true);
@@ -851,29 +683,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private jilmar.LabelRound btnCerrarSesion;
-    private javax.swing.JPanel btnControlStock;
     private javax.swing.JLabel btnExit;
     private jilmar.PanelRound btnGestionClientess;
     private jilmar.PanelRound btnGestionEmpleadoss;
     private jilmar.PanelRound btnGestionProductos;
-    private javax.swing.JPanel btnGestionVentas;
     private javax.swing.JLabel btnMinimize;
-    private javax.swing.JPanel btnServicioTecnico;
     private jilmar.LabelRound gradiente;
-    private jilmar.LabelRound gradiente1;
-    private jilmar.LabelRound gradiente2;
-    private jilmar.LabelRound gradiente3;
     private jilmar.LabelRound gradiente4;
     private jilmar.LabelRound gradiente5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -888,9 +708,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel lblAccesos;
@@ -902,9 +719,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblServiciosPendientes;
     private javax.swing.JLabel lblStock10;
     private javax.swing.JLabel lblStock5;
-    private javax.swing.JLabel lblStock6;
-    private javax.swing.JLabel lblStock7;
-    private javax.swing.JLabel lblStock8;
     private javax.swing.JLabel lblStock9;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUser;
@@ -921,9 +735,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlEmpleados;
     private javax.swing.JPanel pnlProductos;
     private jilmar.PanelRound pnlResumen;
-    private javax.swing.JPanel pnlStock;
-    private javax.swing.JPanel pnlTecnico;
-    private javax.swing.JPanel pnlVentas;
     // End of variables declaration//GEN-END:variables
 
 }

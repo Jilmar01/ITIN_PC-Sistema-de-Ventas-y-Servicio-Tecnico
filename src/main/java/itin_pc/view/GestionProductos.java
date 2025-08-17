@@ -411,11 +411,18 @@ public class GestionProductos extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bntRegistrarProductoMouseClicked(evt);
             }
+        });
+        bntRegistrarProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                bntRegistrarProductoMouseEntered(evt);
+                // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu botón lo permite)
+                bntRegistrarProducto.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));
             }
+
+            @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                bntRegistrarProductoMouseExited(evt);
+                // Al salir el mouse, se vuelve al gradiente original
+                bntRegistrarProducto.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
             }
         });
         pnlRegistroEmpleado.add(bntRegistrarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 140, 40));
@@ -433,11 +440,17 @@ public class GestionProductos extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLimpiarFormularioMouseClicked(evt);
             }
+        });
+        btnLimpiarFormulario.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLimpiarFormularioMouseEntered(evt);
+                // Cuando el mouse entra, se oscurece
+                btnLimpiarFormulario.setBackground(new Color(102, 102, 102));
             }
+            @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLimpiarFormularioMouseExited(evt);
+                // Cuando el mouse sale, vuelve al original
+                btnLimpiarFormulario.setBackground(new Color(153, 153, 153));
             }
         });
         pnlRegistroEmpleado.add(btnLimpiarFormulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 140, 40));
@@ -578,6 +591,19 @@ public class GestionProductos extends javax.swing.JFrame {
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBuscarMouseClicked(evt);
+            }
+        });
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu botón lo permite)
+                btnBuscar.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                // Al salir el mouse, se vuelve al gradiente original
+                btnBuscar.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
             }
         });
         pnlListaEmpleados.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 130, 40));
@@ -748,25 +774,9 @@ public class GestionProductos extends javax.swing.JFrame {
         agregarProducto();
     }//GEN-LAST:event_bntRegistrarProductoMouseClicked
 
-    private void bntRegistrarProductoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntRegistrarProductoMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bntRegistrarProductoMouseEntered
-
-    private void bntRegistrarProductoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntRegistrarProductoMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bntRegistrarProductoMouseExited
-
     private void btnLimpiarFormularioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFormularioMouseClicked
         limpiarFormulario();
     }//GEN-LAST:event_btnLimpiarFormularioMouseClicked
-
-    private void btnLimpiarFormularioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFormularioMouseEntered
-        btnLimpiarFormulario.setBackground(new Color(102, 102, 102));
-    }//GEN-LAST:event_btnLimpiarFormularioMouseEntered
-
-    private void btnLimpiarFormularioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFormularioMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiarFormularioMouseExited
 
     private void cmbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroActionPerformed
         switch (cmbFiltro.getSelectedItem().toString()) {
@@ -870,8 +880,6 @@ public class GestionProductos extends javax.swing.JFrame {
                     .filter(prod -> prod.getCategoriaId() == filtroCategoria)
                     .collect(Collectors.toList());
         } else if (filtroMarca > 0) {
-            System.out.println("Hola");
-            System.out.println(filtroMarca);
             listaProductosFiltrados = listaProductosBD.stream()
                     .filter(prod -> prod.getMarcaId() == filtroMarca)
                     .collect(Collectors.toList());
@@ -1175,7 +1183,14 @@ public class GestionProductos extends javax.swing.JFrame {
             btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    // editarEmpleado(filaActual);
+                    int fila = tblProductos.getSelectedRow();
+                    if (fila != -1) {
+                        int productoId = (int) tblProductos.getValueAt(fila, 0);
+                        new ActualizarProducto(productoId).setVisible(true);
+                    }
+                    
+                    verTodosLosProductos();
+                    
                     fireEditingStopped();
                 }
 
@@ -1193,7 +1208,45 @@ public class GestionProductos extends javax.swing.JFrame {
             btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    // new Plantilla().setVisible(true);
+                    int fila = tblProductos.getSelectedRow();
+                    if (fila != -1) {
+                        int productoId = (int) tblProductos.getValueAt(fila, 0);
+
+                        try {
+                            int stock = p.obtenerStockPorProductoId(productoId); // obtenemos el stock
+
+                            boolean continuar = true; // flag para decidir si eliminamos
+
+                            if (stock > 0) {
+                                // Advertencia con opción de continuar o cancelar
+                                int opcion = JOptionPane.showConfirmDialog(null,
+                                        "El producto aún tiene stock: " + stock
+                                        + "\n¿Deseas continuar con la eliminación?",
+                                        "Advertencia",
+                                        JOptionPane.YES_NO_OPTION,
+                                        JOptionPane.WARNING_MESSAGE);
+
+                                if (opcion != JOptionPane.YES_OPTION) {
+                                    continuar = false; // el usuario canceló
+                                }
+                            }
+
+                            if (continuar) {
+                                p.eliminarProducto(productoId);
+                                JOptionPane.showMessageDialog(null,
+                                        "Producto eliminado con éxito.");
+                            }
+
+                        } catch (Excepciones ex) {
+                            Logger.getLogger(GestionProductos.class.getName()).log(Level.SEVERE, null, ex);
+                            JOptionPane.showMessageDialog(null,
+                                    "Error al eliminar producto:\n" + ex.getMessage(),
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+
+                    verTodosLosProductos();
+                    
                     fireEditingStopped();
                 }
 

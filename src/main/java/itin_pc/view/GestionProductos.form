@@ -617,11 +617,10 @@
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bntRegistrarProductoMouseClicked"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bntRegistrarProductoMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bntRegistrarProductoMouseExited"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="bntRegistrarProducto.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));"/>
+                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="bntRegistrarProducto.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu bot&#xf3;n lo permite)&#xa;        bntRegistrarProducto.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        // Al salir el mouse, se vuelve al gradiente original&#xa;        bntRegistrarProducto.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));&#xa;    }&#xa;});"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -649,9 +648,10 @@
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLimpiarFormularioMouseClicked"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLimpiarFormularioMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLimpiarFormularioMouseExited"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="btnLimpiarFormulario.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        // Cuando el mouse entra, se oscurece&#xa;        btnLimpiarFormulario.setBackground(new Color(102, 102, 102));&#xa;    }&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        // Cuando el mouse sale, vuelve al original&#xa;        btnLimpiarFormulario.setBackground(new Color(153, 153, 153));&#xa;    }&#xa;});"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="200" y="460" width="140" height="40"/>
@@ -917,6 +917,7 @@
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="bntRegistrarProducto.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));"/>
+                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu bot&#xf3;n lo permite)&#xa;        btnBuscar.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        // Al salir el mouse, se vuelve al gradiente original&#xa;        btnBuscar.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));&#xa;    }&#xa;});"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
