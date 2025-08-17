@@ -99,7 +99,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         panelRound6 = new jilmar.PanelRound();
         cmbMarcas = new javax.swing.JComboBox<>();
-        bntRegistrarProducto = new jilmar.LabelRound();
+        bntActualizar = new jilmar.LabelRound();
         btnLimpiarFormulario = new jilmar.LabelRound();
         jLabel1 = new javax.swing.JLabel();
 
@@ -326,35 +326,35 @@ public class ActualizarProducto extends javax.swing.JFrame {
 
         pnlRegistroEmpleado.add(panelRound6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 145, 40));
 
-        bntRegistrarProducto.setBackground(new java.awt.Color(0, 204, 255));
-        bntRegistrarProducto.setForeground(new java.awt.Color(255, 255, 255));
-        bntRegistrarProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        bntRegistrarProducto.setText("Guardar");
-        bntRegistrarProducto.setFont(new java.awt.Font("JetBrains Mono NL SemiBold", 0, 14)); // NOI18N
-        bntRegistrarProducto.setRoundBottomLeft(40);
-        bntRegistrarProducto.setRoundBottomRight(40);
-        bntRegistrarProducto.setRoundTopLeft(40);
-        bntRegistrarProducto.setRoundTopRight(40);
-        bntRegistrarProducto.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
-        bntRegistrarProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+        bntActualizar.setBackground(new java.awt.Color(0, 204, 255));
+        bntActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        bntActualizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bntActualizar.setText("Guardar");
+        bntActualizar.setFont(new java.awt.Font("JetBrains Mono NL SemiBold", 0, 14)); // NOI18N
+        bntActualizar.setRoundBottomLeft(40);
+        bntActualizar.setRoundBottomRight(40);
+        bntActualizar.setRoundTopLeft(40);
+        bntActualizar.setRoundTopRight(40);
+        bntActualizar.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
+        bntActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bntRegistrarProductoMouseClicked(evt);
+                bntActualizarMouseClicked(evt);
             }
         });
-        bntRegistrarProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+        bntActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu botón lo permite)
-                bntRegistrarProducto.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));
+                bntActualizar.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));
             }
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 // Al salir el mouse, se vuelve al gradiente original
-                bntRegistrarProducto.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
+                bntActualizar.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
             }
         });
-        pnlRegistroEmpleado.add(bntRegistrarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 140, 40));
+        pnlRegistroEmpleado.add(bntActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 140, 40));
 
         btnLimpiarFormulario.setBackground(new java.awt.Color(153, 153, 153));
         btnLimpiarFormulario.setForeground(new java.awt.Color(255, 255, 255));
@@ -442,9 +442,9 @@ public class ActualizarProducto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPrecioKeyTyped
 
-    private void bntRegistrarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntRegistrarProductoMouseClicked
+    private void bntActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntActualizarMouseClicked
         actulizarProducto();
-    }//GEN-LAST:event_bntRegistrarProductoMouseClicked
+    }//GEN-LAST:event_bntActualizarMouseClicked
 
     private void btnLimpiarFormularioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFormularioMouseClicked
         this.dispose();
@@ -474,6 +474,8 @@ public class ActualizarProducto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, 
                 "No se pudo actualizar el producto. Verifica los datos.");
         }
+        
+        this.dispose();
 
     } catch (Excepciones ex) {
         JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -531,7 +533,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private jilmar.LabelRound bntRegistrarProducto;
+    private jilmar.LabelRound bntActualizar;
     private javax.swing.JLabel btnExit;
     private jilmar.LabelRound btnLimpiarFormulario;
     private javax.swing.JComboBox<Categoria> cmbCategorias;

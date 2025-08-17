@@ -70,7 +70,7 @@ public class ActualizarEmpleado extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         btnLimpiarFormulario = new jilmar.LabelRound();
-        bntRegistrarEmpleado = new jilmar.LabelRound();
+        bntActualizar = new jilmar.LabelRound();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -276,35 +276,35 @@ public class ActualizarEmpleado extends javax.swing.JFrame {
         });
         pnlRegistroEmpleado.add(btnLimpiarFormulario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 140, 40));
 
-        bntRegistrarEmpleado.setBackground(new java.awt.Color(0, 204, 255));
-        bntRegistrarEmpleado.setForeground(new java.awt.Color(255, 255, 255));
-        bntRegistrarEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        bntRegistrarEmpleado.setText("Guardar");
-        bntRegistrarEmpleado.setFont(new java.awt.Font("JetBrains Mono NL SemiBold", 0, 14)); // NOI18N
-        bntRegistrarEmpleado.setRoundBottomLeft(40);
-        bntRegistrarEmpleado.setRoundBottomRight(40);
-        bntRegistrarEmpleado.setRoundTopLeft(40);
-        bntRegistrarEmpleado.setRoundTopRight(40);
-        bntRegistrarEmpleado.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
-        bntRegistrarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+        bntActualizar.setBackground(new java.awt.Color(0, 204, 255));
+        bntActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        bntActualizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bntActualizar.setText("Guardar");
+        bntActualizar.setFont(new java.awt.Font("JetBrains Mono NL SemiBold", 0, 14)); // NOI18N
+        bntActualizar.setRoundBottomLeft(40);
+        bntActualizar.setRoundBottomRight(40);
+        bntActualizar.setRoundTopLeft(40);
+        bntActualizar.setRoundTopRight(40);
+        bntActualizar.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
+        bntActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bntRegistrarEmpleadoMouseClicked(evt);
+                bntActualizarMouseClicked(evt);
             }
         });
-        bntRegistrarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+        bntActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu botón lo permite)
-                bntRegistrarEmpleado.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));
+                bntActualizar.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));
             }
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 // Al salir el mouse, se vuelve al gradiente original
-                bntRegistrarEmpleado.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
+                bntActualizar.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));
             }
         });
-        pnlRegistroEmpleado.add(bntRegistrarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 140, 40));
+        pnlRegistroEmpleado.add(bntActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 140, 40));
 
         jPanel1.add(pnlRegistroEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 370, 530));
 
@@ -350,12 +350,12 @@ public class ActualizarEmpleado extends javax.swing.JFrame {
         initY = evt.getY();
     }//GEN-LAST:event_panelActionsMousePressed
 
-    private void bntRegistrarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntRegistrarEmpleadoMouseClicked
+    private void bntActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntActualizarMouseClicked
         int actualizar = JOptionPane.showConfirmDialog(this, "¿Seguro que quieres actualizar?");
         if (actualizar == JOptionPane.YES_OPTION) {
             actulizarEmpleado();
         }
-    }//GEN-LAST:event_bntRegistrarEmpleadoMouseClicked
+    }//GEN-LAST:event_bntActualizarMouseClicked
 
     private void btnLimpiarFormularioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFormularioMouseClicked
         this.dispose();
@@ -406,7 +406,7 @@ public class ActualizarEmpleado extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private jilmar.LabelRound bntRegistrarEmpleado;
+    private jilmar.LabelRound bntActualizar;
     private javax.swing.JLabel btnExit;
     private jilmar.LabelRound btnLimpiarFormulario;
     private javax.swing.JComboBox<String> cmbPuesto;

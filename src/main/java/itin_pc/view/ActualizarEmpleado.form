@@ -508,7 +508,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="jilmar.LabelRound" name="bntRegistrarEmpleado">
+                <Component class="jilmar.LabelRound" name="bntActualizar">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="cc" red="0" type="rgb"/>
@@ -527,11 +527,11 @@
                     <Property name="roundTopRight" type="int" value="40"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bntRegistrarEmpleadoMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bntActualizarMouseClicked"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="bntRegistrarEmpleado.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));"/>
-                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="bntRegistrarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu bot&#xf3;n lo permite)&#xa;        bntRegistrarEmpleado.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        // Al salir el mouse, se vuelve al gradiente original&#xa;        bntRegistrarEmpleado.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));&#xa;    }&#xa;});"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="bntActualizar.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));"/>
+                    <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="bntActualizar.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        // Al entrar el mouse, se aplica solo un color (puedes usar un gradiente de un solo color si tu bot&#xf3;n lo permite)&#xa;        bntActualizar.setGradientHorizontal(new Color(2, 114, 185), new Color(2, 114, 185));&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        // Al salir el mouse, se vuelve al gradiente original&#xa;        bntActualizar.setGradientHorizontal(new Color(4, 178, 234), new Color(2, 114, 185));&#xa;    }&#xa;});"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
