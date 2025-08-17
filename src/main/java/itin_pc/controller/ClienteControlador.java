@@ -48,6 +48,56 @@ public class ClienteControlador {
     }
 
     /**
+     * Obtiene un cliente por su ID.
+     *
+     * @param clienteId ID del cliente a obtener.
+     * @return Objeto Cliente con los datos del cliente.
+     * @throws Excepciones si el ID es inválido o ocurre un error al obtener el
+     * cliente.
+     */
+    public Cliente obtenerClientePorId(int clienteId) throws Excepciones {
+        if (!ValidacionDatos.esEntero(clienteId)) {
+            throw new Excepciones("ID de cliente inválido.");
+        }
+        return clienteDAO.obtenerClientePorId(clienteId);
+    }
+
+    /**
+     * Actualiza los datos de un cliente en el sistema.
+     *
+     * @param cliente Objeto Cliente con los datos actualizados.
+     * @return true si la actualización fue exitosa, false en caso contrario.
+     * @throws Excepciones si los datos son inválidos o ocurre un error en la
+     * actualización.
+     */
+    public boolean actualizarCliente(Cliente cliente) throws Excepciones {
+        if (cliente == null || cliente.getId() <= 0) {
+            throw new Excepciones("ID de cliente inválido.");
+        }
+        if (!ValidacionDatos.esSoloTexto(cliente.getNombre())
+                || !ValidacionDatos.esSoloTexto(cliente.getApellido())
+                || !ValidacionDatos.esEntero(cliente.getTelefono())) {
+            throw new Excepciones("Datos del cliente inválidos.");
+        }
+        return clienteDAO.actualizarCliente(cliente);
+    }
+
+    /**
+     * Elimina un cliente por su ID.
+     *
+     * @param clienteId ID del cliente a eliminar.
+     * @return true si la eliminación fue exitosa, false en caso contrario.
+     * @throws Excepciones si el ID es inválido o ocurre un error al eliminar el
+     * cliente.
+     */
+    public boolean eliminarCliente(int clienteId) throws Excepciones {
+        if (!ValidacionDatos.esEntero(clienteId)) {
+            throw new Excepciones("ID de cliente inválido.");
+        }
+        return clienteDAO.eliminarCliente(clienteId);
+    }
+
+    /**
      * Metodo para obtener clientes VIP por mes y año
      *
      * @param mes Mes del año a filtrar
@@ -71,8 +121,8 @@ public class ClienteControlador {
     }
 
     public TipoCliente obtenerTipoClientePorId(int tipoClienteId) throws Excepciones {
-        
-        if(!ValidacionDatos.esEntero(tipoClienteId)) {
+
+        if (!ValidacionDatos.esEntero(tipoClienteId)) {
             throw new Excepciones("ID de tipoCliente inválido");
         }
         return clienteDAO.obTipoClientePorId(tipoClienteId);
