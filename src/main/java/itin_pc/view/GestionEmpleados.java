@@ -694,7 +694,7 @@ public class GestionEmpleados extends javax.swing.JFrame {
             }
 
             limpiarFormulario();
-            
+
             verTodosLosEmpleados();
 
         } catch (Excepciones ex) {
@@ -764,7 +764,7 @@ public class GestionEmpleados extends javax.swing.JFrame {
                         u.obtenerUsuario(empleado.getId()).getRol(),
                         empleado.getFechaContratacion()
                     };
-                modeloTabla.addRow(fila);
+                    modeloTabla.addRow(fila);
                 }
             }
 
@@ -996,10 +996,15 @@ public class GestionEmpleados extends javax.swing.JFrame {
                     int fila = tblEmpleados.getSelectedRow();
                     if (fila != -1) {
                         int idEmpleado = (int) tblEmpleados.getValueAt(fila, 0);
-                        new ActualizarEmpleado(idEmpleado).setVisible(true);
+                        ActualizarEmpleado actualizarEmpleado = new ActualizarEmpleado(idEmpleado);
+                        actualizarEmpleado.addWindowListener(new java.awt.event.WindowAdapter() {
+                            @Override
+                            public void windowClosed(java.awt.event.WindowEvent e) {
+                                verTodosLosEmpleados();
+                            }
+                        });
+                        actualizarEmpleado.setVisible(true);
                     }
-                    verTodosLosEmpleados();
-                    fireEditingStopped();
                 }
 
                 @Override
@@ -1050,7 +1055,6 @@ public class GestionEmpleados extends javax.swing.JFrame {
                         }
                     }
                     verTodosLosEmpleados();
-                    fireEditingStopped();
                 }
 
                 @Override

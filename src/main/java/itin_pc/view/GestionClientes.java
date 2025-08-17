@@ -721,7 +721,8 @@ public class GestionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoActionPerformed
 
     private void cmbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroActionPerformed
-       if(!bandera) aplicarFiltros(); 
+        if (!bandera)
+            aplicarFiltros();
     }//GEN-LAST:event_cmbFiltroActionPerformed
 
     private void cmbFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbFiltroMouseClicked
@@ -909,9 +910,9 @@ public class GestionClientes extends javax.swing.JFrame {
             tblClientes.getColumnModel().getColumn(0).setPreferredWidth(2);
             tblClientes.getColumnModel().getColumn(1).setPreferredWidth(100);
             tblClientes.getColumnModel().getColumn(2).setPreferredWidth(40);
-            tblClientes.getColumnModel().getColumn(3).setPreferredWidth(70);
-            tblClientes.getColumnModel().getColumn(4).setPreferredWidth(35);
-            tblClientes.getColumnModel().getColumn(5).setPreferredWidth(120);
+            tblClientes.getColumnModel().getColumn(3).setPreferredWidth(110);
+            tblClientes.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tblClientes.getColumnModel().getColumn(5).setPreferredWidth(70);
         }
 
         // Agregar renderer personalizado para la columna de rol
@@ -983,7 +984,6 @@ public class GestionClientes extends javax.swing.JFrame {
     class AccionesCellRenderer extends JPanel implements javax.swing.table.TableCellRenderer {
 
         private final LabelRound btnEditar;
-        private final LabelRound btnEliminar;
 
         public AccionesCellRenderer() {
             setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -997,17 +997,7 @@ public class GestionClientes extends javax.swing.JFrame {
             btnEditar.setHorizontalAlignment(SwingConstants.CENTER);
             btnEditar.setOpaque(true);
 
-            btnEliminar = new LabelRound();
-            btnEliminar.setText("Eliminar");
-            btnEliminar.setBackground(new Color(220, 53, 69));
-            btnEliminar.setForeground(Color.WHITE);
-            btnEliminar.setFont(new java.awt.Font("JetBrains Mono SemiBold", 0, 12));
-            btnEliminar.setPreferredSize(new Dimension(70, 25));
-            btnEliminar.setHorizontalAlignment(SwingConstants.CENTER);
-            btnEliminar.setOpaque(true);
-
             add(btnEditar);
-            add(btnEliminar);
         }
 
         @Override
@@ -1027,7 +1017,6 @@ public class GestionClientes extends javax.swing.JFrame {
 
         private final JPanel panel;
         private LabelRound btnEditar;
-        private LabelRound btnEliminar;
 
         public AccionesCellEditor() {
 
@@ -1045,21 +1034,21 @@ public class GestionClientes extends javax.swing.JFrame {
             btnEditar.setOpaque(true);
             btnEditar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-            btnEliminar = new LabelRound();
-            btnEliminar.setText("Eliminar");
-            btnEliminar.setBackground(new Color(220, 53, 69));
-            btnEliminar.setForeground(Color.WHITE);
-            btnEliminar.setFont(new java.awt.Font("JetBrains Mono SemiBold", 0, 12));
-            btnEliminar.setPreferredSize(new Dimension(70, 25));
-            btnEliminar.setHorizontalAlignment(SwingConstants.CENTER);
-            btnEliminar.setOpaque(true);
-            btnEliminar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
             btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    // editarEmpleado(filaActual);
-                    fireEditingStopped();
+                    int fila = tblClientes.getSelectedRow();
+                    if (fila != -1) {
+                        int idCliente = (int) tblClientes.getValueAt(fila, 0);
+                        ActualizarCliente actualizarCliente = new ActualizarCliente(idCliente);
+                        actualizarCliente.addWindowListener(new java.awt.event.WindowAdapter() {
+                            @Override
+                            public void windowClosed(java.awt.event.WindowEvent e) {
+                                verTodosLosClientes();
+                            }
+                        });
+                        actualizarCliente.setVisible(true);
+                    }
                 }
 
                 @Override
@@ -1073,26 +1062,7 @@ public class GestionClientes extends javax.swing.JFrame {
                 }
             });
 
-            btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
-                @Override
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    // new Plantilla().setVisible(true);
-                    fireEditingStopped();
-                }
-
-                @Override
-                public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    btnEliminar.setBackground(new Color(200, 33, 49));
-                }
-
-                @Override
-                public void mouseExited(java.awt.event.MouseEvent evt) {
-                    btnEliminar.setBackground(new Color(220, 53, 69));
-                }
-            });
-
             panel.add(btnEditar);
-            panel.add(btnEliminar);
         }
 
         @Override

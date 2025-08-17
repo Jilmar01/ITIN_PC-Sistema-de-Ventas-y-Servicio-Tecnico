@@ -845,6 +845,8 @@ public class GestionProductos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Producto registrado exitosamente.");
 
             limpiarFormulario();
+            
+            verTodosLosProductos();
 
         } catch (Excepciones ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -900,9 +902,7 @@ public class GestionProductos extends javax.swing.JFrame {
 
     private void verTodosLosProductos() {
         try {
-            if (listaProductosBD == null) {
-                listaProductosBD = new ArrayList<>(p.obtenerProductos());
-            }
+            listaProductosBD = new ArrayList<>(p.obtenerProductos());
             listaProductosFiltrados = new ArrayList<>(listaProductosBD);
             actualizarTabla();
         } catch (Excepciones ex) {
@@ -1186,12 +1186,15 @@ public class GestionProductos extends javax.swing.JFrame {
                     int fila = tblProductos.getSelectedRow();
                     if (fila != -1) {
                         int productoId = (int) tblProductos.getValueAt(fila, 0);
-                        new ActualizarProducto(productoId).setVisible(true);
+                        ActualizarProducto actualizarProducto = new ActualizarProducto(productoId);
+                        actualizarProducto.addWindowListener(new java.awt.event.WindowAdapter() {
+                            @Override
+                            public void windowClosed(java.awt.event.WindowEvent e) {
+                                verTodosLosProductos();
+                            }
+                        });
+                        actualizarProducto.setVisible(true);
                     }
-                    
-                    verTodosLosProductos();
-                    
-                    fireEditingStopped();
                 }
 
                 @Override
@@ -1215,7 +1218,7 @@ public class GestionProductos extends javax.swing.JFrame {
                         try {
                             int stock = p.obtenerStockPorProductoId(productoId); // obtenemos el stock
 
-                            boolean continuar = true; // flag para decidir si eliminamos
+                            boolean continuar = true;
 
                             if (stock > 0) {
                                 // Advertencia con opción de continuar o cancelar
@@ -1244,10 +1247,7 @@ public class GestionProductos extends javax.swing.JFrame {
                                     "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
-
                     verTodosLosProductos();
-                    
-                    fireEditingStopped();
                 }
 
                 @Override
