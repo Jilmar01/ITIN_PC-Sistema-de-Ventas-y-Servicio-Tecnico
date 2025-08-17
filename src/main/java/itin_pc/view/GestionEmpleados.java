@@ -669,7 +669,7 @@ public class GestionEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbFiltroMouseClicked
 
     private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
-        new Reportes().setVisible(true);
+        new ReportesEmpleado().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnReportesMouseClicked
 
