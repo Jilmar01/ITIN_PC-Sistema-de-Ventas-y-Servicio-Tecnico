@@ -62,6 +62,21 @@ public class ClienteControlador {
         return clienteDAO.obtenerClientePorId(clienteId);
     }
 
+        /**
+     * Busca un cliente por su nombre.
+     *
+     * @param nombre Nombre del cliente a buscar.
+     * @return Cliente encontrado o null si no existe.
+     * @throws Excepciones si el nombre es inválido o ocurre un error al buscar el cliente.
+     */
+    public List<Cliente> buscarClientePorNombre(String nombre) throws Excepciones {
+        System.out.println(nombre);
+        if (!ValidacionDatos.esSoloTexto(nombre)) {
+            throw new Excepciones("Nombre de cliente inválido.");
+        }
+        return clienteDAO.obtenerClientePorAtributo("nombre", nombre);
+    }
+
     /**
      * Actualiza los datos de un cliente en el sistema.
      *

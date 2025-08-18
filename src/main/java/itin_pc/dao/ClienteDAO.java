@@ -81,6 +81,41 @@ public class ClienteDAO {
     }
 
     /**
+     * Obtiene clientes por un atributo específico y su valor.
+     *
+     * @param nombreAtributo Nombre del atributo (por ejemplo, "correo",
+     *                       "telefono").
+     * @param valorAtributo  Valor del atributo a buscar.
+     * @return Cliente encontrado o null si no existe.
+     * @throws Excepciones si ocurre un error al obtener el cliente.
+     */
+    public List<Cliente> obtenerClientePorAtributo(String nombreAtributo, String valorAtributo) throws Excepciones {
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM clientes WHERE " + nombreAtributo + " LIKE ?";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setString(1, "%" + valorAtributo + "%");
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Cliente cliente = new Cliente();
+                    cliente.setId(rs.getInt("cliente_id"));
+                    cliente.setNombre(rs.getString("nombre"));
+                    cliente.setApellido(rs.getString("apellido"));
+                    cliente.setCorreo(rs.getString("correo"));
+                    cliente.setTelefono(rs.getString("telefono"));
+                    cliente.setTipoClienteId(rs.getInt("tipo_cliente_id"));
+                    clientes.add(cliente);
+                }
+            }
+        } catch (SQLException e) {
+            throw new Excepciones("ClienteDAO", e.getMessage());
+        }
+
+        return clientes;
+    }
+
+    /**
      * Inserta un nuevo cliente en la base de datos.
      * 
      * @param cliente Objeto Cliente con los datos a insertar.
@@ -237,7 +272,6 @@ public class ClienteDAO {
         return tipos;
     }
 
-    
     public TipoCliente obTipoClientePorId(int id) throws Excepciones {
         String sql = "SELECT * FROM tipos_cliente WHERE tipo_cliente_id = ?";
         TipoCliente tipoCliente = null;
