@@ -218,12 +218,13 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="JetBrains Mono NL SemiBold" size="24" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="vendedor_jhonny"/>
+                    <Property name="text" type="java.lang.String" value="Admin"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
                   </Properties>
                   <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUserActionPerformed"/>
                     <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtUserKeyTyped"/>
                   </Events>
                   <Constraints>
@@ -288,7 +289,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="JetBrains Mono SemiBold" size="24" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="vendedor123"/>
+                    <Property name="text" type="java.lang.String" value="ESPE123"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>

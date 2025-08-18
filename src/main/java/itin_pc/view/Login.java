@@ -147,8 +147,13 @@ public class Login extends javax.swing.JFrame {
         pnlUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtUser.setFont(new java.awt.Font("JetBrains Mono NL SemiBold", 0, 24)); // NOI18N
-        txtUser.setText("vendedor_jhonny");
+        txtUser.setText("Admin");
         txtUser.setBorder(null);
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtUserKeyTyped(evt);
@@ -175,7 +180,7 @@ public class Login extends javax.swing.JFrame {
         pnlPass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtPass.setFont(new java.awt.Font("JetBrains Mono SemiBold", 0, 24)); // NOI18N
-        txtPass.setText("vendedor123");
+        txtPass.setText("ESPE123");
         txtPass.setBorder(null);
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -298,6 +303,10 @@ public class Login extends javax.swing.JFrame {
             btnLogin();
         }
     }//GEN-LAST:event_txtUserKeyTyped
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
